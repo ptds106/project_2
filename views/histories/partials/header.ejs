@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <title>this is the title</title>
+  <title>Wars</title>
 </head>
 <body>
     <div class="navbar">
@@ -21,16 +21,29 @@
             <a href="contemporaries">CONTEMPORARY WARS</a>
           </div>
         </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Historical Weapons
+
+        <div class="dropdown2">
+            <button class="dropbtn2">Historical Weapons
               <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-content">
+            <div class="dropdown-content2">
               <a href="ancients">ANCIENT WEAPONS</a>
               <a href="medivals">MEDIVAL WEAPONS</a>
               <a href="moderns">MODERN WEAPONS</a>
               <a href="contemporaries">CONTEMPORARY WEAPONS</a>
             </div>
           </div> 
+        </div> 
+            
+        <div class="navbar2">
+
+              <% if (user) { %>
+                <a href="/logout"><i class="log"></i>Log Out</a>
+              <% } else { %>
+                <a href="/auth/google"><i class="log"></i>Login with Google</a>
+              <% } %>
+              <a href="/">Add/View Weapons</a>
+              <a href="/">Add/View Wars</a>
+            </div> 
+        
       </div>
-    <h1>Wars and Weapons</h1>
