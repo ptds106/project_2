@@ -1,23 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const winSchema = new Schema({
-  winCountry: {type: String,}
+const casualtySchema = new Schema({
+  casualties: {type: Number, default: 'needs updates'}
   },
   );
 
-const warsSchema = new Schema({
-  region: { type: String, enum: ['Americas', 'Europe', 'Asia','Africa', 'Middle-East']},
-  involvedCountries: { type: String, enum: ["American", "Southwest", "United"] },
+const historiesSchema = new Schema({
+  region: { type: String, default: 'needs updates'},
+  involvedStates: { type: String, default: 'needs updates' },
   date: {
     type: String,
     default: function() {
       return Number(new Date().getFullYear()) + 1;
     }
   },
-  win: {winSchema} ,
-  ticket: [{type: Schema.Types.ObjectId, ref: 'Ticket'}]
+  win: { type: String, default: 'needs updates'}, 
+  casualties: {casualtySchema} ,
+  weapon: [{type: Schema.Types.ObjectId, ref: 'Weapon'}]
 });
 
-module.exports = mongoose.model("Flight", warsSchema);
+module.exports = mongoose.model("History", historiesSchema);
 

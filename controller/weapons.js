@@ -1,15 +1,15 @@
-var Weapon = require('../models/weapon')
-var War = require('../models/history')
+var Weapon = require("../models/weapon");
+var War = require("../models/history");
 
 const addTowar = (req, res) => {
-  console.log("this is seats: ",req.body.seats)
+  console.log("this is seats: ", req.body.seats);
   war.findById(req.params.id, (err, war) => {
-     war.weapon.push(req.body.seats);
+    war.weapon.push(req.body.seats);
     war.save(err => {
-      res.redirect(`/wars/${war._id}`)
-    })
-  })
-}
+      res.redirect(`/wars/${war._id}`);
+    });
+  });
+};
 // const addToCast = (req, res) => {
 //   Movie.findById(req.params.id, (err, movie) => {
 //     movie.cast.push(req.body.performerId)
@@ -26,25 +26,25 @@ const addTowar = (req, res) => {
 //     res.redirect('/weapons/new')
 //   })
 // }
-const create = (req,res) => {
-   console.log(req.body)
-   var s = req.body.seat
-   weapon.create(req.body, (err, weapon) => {
-     res.redirect('/wars')
-    });
-  }
+const create = (req, res) => {
+  console.log(req.body);
+  var s = req.body.seat;
+  weapon.create(req.body, (err, weapon) => {
+    res.redirect("/wars");
+  });
+};
 
 const newweapon = (req, res) => {
   weapon.find({}, (err, weapons) => {
-    res.render('wars/weapons/new', {
-      title: 'Add weapons',
-      weapons,
-    })
-  })
-}
+    res.render("wars/weapons/new", {
+      title: "Add weapons",
+      weapons
+    });
+  });
+};
 
 module.exports = {
   new: newweapon,
   create,
-  addTowar,
-}
+  addTowar
+};
