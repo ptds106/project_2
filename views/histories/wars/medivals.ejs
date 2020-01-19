@@ -1,8 +1,19 @@
 <%- include('../partials/header') %>
     <style class = "index_img">
         body {
-          background-image: url('https://whoaskd.com/wp-content/uploads/2019/05/the-iron-throne-4k-fv-1080x675.jpg');
-          background-size: 100%
+          background-image: url('https://www.suyongso.com/files/attach/images/115/773/474/004/99b983892094b5c6d2fc3736e15da7d1.jpg');
+          background-size: 106%
         }
-        </style>
+      </style>
+
+      <ul class= 'medieval'>
+        <li><%warsSorted.forEach((t, idx) => {if(Number(t.dateFrom.substring(0,4)) < 1899) { %>
+          <a  class ="medieval-a" href="/medivals/<%= t._id %>">
+            <%= t.name%>
+            in <%= t.region%>
+            from: <%= t.dateFrom.substring(0,4)%>
+            ~ <%= t.dateTo.substring(0,4)%>
+          </a> 
+          <%}});%>
+        </li></ul>
   <%- include('../partials/footer') %>

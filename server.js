@@ -17,7 +17,7 @@ require('./config/database');
 
 
 var indexRouter = require('./routes/index');
-var historyRouter = require('./routes/histories/');
+var historyRouter = require('./routes/histories');
 const ancientsRouter = require('./routes/ancients')
 const medivalsRouter = require('./routes/medivals')
 const modernsRouter = require('./routes/moderns')

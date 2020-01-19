@@ -1,6 +1,6 @@
 var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
-var History = require('../models/history');
+var War = require('../models/history');
 
 
 passport.use(new GoogleStrategy({
@@ -9,30 +9,31 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK
   },
   function(accessToken, refreshToken, profile, cb) {
-    History.findOne({ 'googleId': profile.id }, function(err, history) {
+    console.log(profile);
+    War.findOne({ 'googleId': profile.id }, function(err, war) {
       if (err) return cb(err);
-      if (history) {
-        return cb(null, history);
+      if (war) {
+        return cb(null, war);
       } else {
-        // we have a new history via OAuth!
-        var newHistory = new History({
-          name: profile.displayName,
-          email: profile.emails[0].value,
-          googleId: profile.id
-        });
-        newHistory.save(function(err) {
-          if (err) return cb(err);
-          return cb(null, newHistory);
+          // we have a new user via OAuth!
+          var newWar = new War({
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            googleId: profile.id,
+          })
+          newWar.save(err => {
+            if (err) return cb(err)
+            return cb(null, newWar)
         });
       }
     });
   }
 ));
-passport.serializeUser((history, done) => {
-    done(null, history.id);
+passport.serializeUser((war, done) => {
+    done(null, war.id);
 });
 passport.deserializeUser((id, done) =>{
-    History.findById(id, (err, history) =>{
-      done(err, history);
+    War.findById(id, (err, war) =>{
+      done(err, war);
     });
   });

@@ -3,7 +3,7 @@ var historiesCtrl = require('../controller/histories');
 
 router.get('/histories', historiesCtrl.index);
 router.get('/histories/add-wars', historiesCtrl.new);
-
+router.post('/histories', historiesCtrl.create)
 
 router.delete('/histories/:id', historiesCtrl.delete);
 

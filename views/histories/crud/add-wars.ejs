@@ -1,4 +1,35 @@
 <%- include('../partials/header') %>
+<style class = "index_img">
+body {
+    background-image: url("https://www.myjewishlearning.com/wp-content/uploads/2003/02/torah-scroll.jpg");
+    background-size: 100%;
+  }
+  </style>
 
-<h1></h1>
+
+  <div class="create-War">
+  <form action="/histories" method="POST">
+    <h2>World Wars</h2>
+  <br/>
+  <label>Name of War: <input type="text" name="name" class = 'name'/> </label>
+  <br/>
+  <br/>
+  <label>Region: <input type= "text" name="region"></label>
+  <br/>
+  <br/>
+  <label>States: <input type= "text" name="involvedStates1"></label> vs 
+  <label>States: <input type= "text" name="involvedStates2"></label>
+  <br/>
+  <br/>
+  <label>Casualties: <input type= "number" name="numberOfLoss"></label>
+  <br/>
+  <br/>
+  <label>From: <input type="month" name="dateFrom"></label> 
+  <label>to: <input type="month" name="dateTo"></label>
+  <br/>
+  <br/>
+  <input type="submit" value="update wars" />
+</form>
+</div>
+
 <%- include('../partials/footer') %>

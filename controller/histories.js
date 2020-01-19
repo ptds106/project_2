@@ -30,6 +30,19 @@ function addWar(req, res, next) {
     res.redirect("histories/crud/add-wars");
   });
 }
+
+const create = (req, res) => {
+
+ console.log("this is create")
+ const war = new History(req.body);
+ war.save(err => {
+   if (err) return res.redirect("histories/crud/add-wars");
+   res.redirect("/histories");
+ });
+ console.log(war)
+};
+
+
 function delWar(req, res, next) {
   req.user.facts.pop();
   req.user.save(function(err) {
@@ -38,6 +51,7 @@ function delWar(req, res, next) {
 }
 module.exports = {
   index,
+  create,
   new: newWar,
   addWar,
   delete: delWar
