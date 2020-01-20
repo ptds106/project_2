@@ -20,5 +20,23 @@
     <li>Weapons: <%=history.numberOfLoss%></li>
   </ul>
 </div>
+<div class= "comments-div">
+  <ul class= "comments-ul">
+    <li class= "comments-li">
+      <%for(let i = 0; i < history.comments.length; i++) {%>
+        <%= history.comments[i]%>
+        <%};%>
+  </li>
+</ul>
+</div>
+
+<div class= comments-text>
+  <form action="/ancients" method="POST">>
+Comments:<br>
+<textarea class="textarea" name="comments" rows="6" cols="45">
+</textarea>
+<input type="submit">
+</form>
+</div>
 
 <%- include('../partials/footer') %>

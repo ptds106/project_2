@@ -11,10 +11,15 @@ body {
     <%warsSorted.forEach((t, idx) => {if(Number(t.dateFrom.substring(0,4)) > -9999) { %>
     <a class="history-a" href="/histories/<%= t._id %>">
       <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%= t.dateTo.substring(0,4)%>
+      <div class="update">
       <form action="/histories/delete/<%=t._id%>?_method=DELETE" 
         method="POST">
-        <button type="submit" class="btn white-text">Delete war</button>
+        <button type="submit" class="histories-button">Delete war</button>
       </form>
+      <form action="/histories/edit/<%=t._id%>">
+        <button type="Edit"class="histories-button">Update ETA </button>
+        </form>
+      </div>
     </a>
     <%}});%>
   </li>

@@ -37,16 +37,16 @@ const indexView = (req, res) => {
     if (err) {
       res.render("error");
     }
-    const sortedWars = war.sort((a, b) => (a.dateFrom > b.dateFrom) ? 1 : -1)
+    const sortedWars = war.sort((a, b) => (a.dateFrom > b.dateFrom ? 1 : -1));
     res.render("histories/wars/histories", {
       warsSorted: sortedWars,
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: war,
+      histories: war
     });
-  }); 
-}
+  });
+};
 
 const create = (req, res) => {
   console.log("this is create");
@@ -57,9 +57,26 @@ const create = (req, res) => {
   });
 };
 const deleteWars = (req, res) => {
-  console.log('deleting contemporary ID')
+  console.log("deleting contemporary ID");
   History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   res.redirect("/histories");
+};
+const edit = (req, res) => {
+  History.findById(req.params.id, (err, history) => {
+    res.render("histories/crud/edit-wars", {
+      histories: history,
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name
+    });
+  });
+};
+
+const update = (req, res) => {
+  History.findByIdAndUpdate(req.params.id, req.body, (err, flight) => {
+    if (err) return res.status(500).send(err);
+    res.redirect("/histories/views");
+  });
 };
 module.exports = {
   index,
@@ -67,4 +84,6 @@ module.exports = {
   create,
   new: newWar,
   delete: deleteWars,
+  edit,
+  update
 };

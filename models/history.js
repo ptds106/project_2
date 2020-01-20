@@ -22,6 +22,7 @@ const historiesSchema = new Schema({
       return Number(new Date().getFullYear()) + 1;
     }
   },
+  comments: [{type: String}],
   casualties: [casualtySchema],
   weapon: [{type: Schema.Types.ObjectId, ref: 'Weapon'}]
 });
