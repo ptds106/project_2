@@ -1,4 +1,5 @@
-const History = require("../models/history");
+const History = require("../../models/history");
+var weapon = require("../../models/weapon");
 
 const newWar = (req, res) => {
   History.find({}, (err, war) => {

@@ -1,5 +1,5 @@
-const History = require("../models/history");
-var weapon = require("../models/weapon");
+const History = require("../../models/history");
+var weapon = require("../../models/weapon");
 
 const index = (req, res) => {
   History.find({}, (err, war) => {

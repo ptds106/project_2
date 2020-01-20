@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var weaponsCtrl = require('../controller/weapons');
+var weaponsCtrl = require('../../controller/weapons/weapons');
 
 router.get('/', weaponsCtrl.index);
 router.get('/add-weapons', weaponsCtrl.new);

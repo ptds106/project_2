@@ -1,5 +1,5 @@
-const Weapon = require("../models/weapon");
-const History = require("../models/history");
+const Weapon = require("../../models/weapon");
+const History = require("../../models/history");
 
 
 const newWeapon = (req, res) => {

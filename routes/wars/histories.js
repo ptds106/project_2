@@ -1,6 +1,5 @@
 var router = require('express').Router();
-var historiesCtrl = require('../controller/histories');
-var usersCtrl = require('../controller/users');
+var historiesCtrl = require('../../controller/wars/histories');
 
 router.get('/histories', historiesCtrl.index);
 router.get('/histories/views', historiesCtrl.indexView);

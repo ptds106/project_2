@@ -17,13 +17,17 @@ require('./config/database');
 
 
 var indexRouter = require('./routes/index');
-var historyRouter = require('./routes/histories');
-var weaponsRouter = require('./routes/weapons');
-const ancientsRouter = require('./routes/ancients')
-const medivalsRouter = require('./routes/medivals')
-const modernsRouter = require('./routes/moderns')
-const contemporariesRouter = require('./routes/contemporaries')
+var historyRouter = require('./routes/wars/histories');
+const ancientsRouter = require('./routes/wars/ancients')
+const medivalsRouter = require('./routes/wars/medivals')
+const modernsRouter = require('./routes/wars/moderns')
+const contemporariesRouter = require('./routes/wars/contemporaries')
 
+var weaponsRouter = require('./routes/weapons/weapons');
+const ancientsWeaponsRouter = require('./routes/Weapons/ancients')
+const medivalsWeaponsRouter = require('./routes/Weapons/medivals')
+const modernsWeaponsRouter = require('./routes/Weapons/moderns')
+const contemporariesWeaponsRouter = require('./routes/Weapons/contemporaries')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +54,11 @@ app.use('/ancients', ancientsRouter)
 app.use('/medivals', medivalsRouter)
 app.use('/moderns', modernsRouter)
 app.use('/contemporaries', contemporariesRouter)
+
+app.use('/weapons/ancients', ancientsWeaponsRouter)
+app.use('/weapons/medivals', medivalsWeaponsRouter)
+app.use('/weapons/moderns', modernsWeaponsRouter)
+app.use('/weapons/contemporaries', contemporariesWeaponsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
