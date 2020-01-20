@@ -10,7 +10,7 @@ const index = (req, res) => {
       a.weaponYear > b.weaponYear ? 1 : -1
     );
     res.render("histories/weapons/contemporaries", {
-      weaponSorted: sortedWeapons,
+      weaponsSorted: sortedWeapons,
       id: req.params.id,
       user: req.user,
       name: req.query.name,

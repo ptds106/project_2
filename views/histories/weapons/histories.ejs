@@ -1,19 +1,23 @@
 <%- include('../partials/header') %>
 <style class = "index_img">
 body {
-    background-image: url("https://www.myjewishlearning.com/wp-content/uploads/2003/02/torah-scroll.jpg");
+    background-image: url("https://c.wallhere.com/photos/a4/8b/tools_work_blacksmith_Mallet_embers-32156.jpg!d");
     background-size: 100%;
   }
   </style>
 
 <ul class="history-view">
   <li>
-    <%warsSorted.forEach((t, idx) => {if(Number(t.dateFrom.substring(0,4)) > -9999) { %>
+    <%weaponSorted.forEach((t, idx) => {if(Number(t.weaponYear > -9999)) { %>
     <a class="history-a" href="/histories/<%= t._id %>">
-      <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%= t.dateTo.substring(0,4)%>
+      Name: <%= t.weaponName%> 
+      melee or range: <%= t.weaponType%>
+      Type: <%= t.weaponTypeName%>
+      region: <%= t.weaponOriginRegion%>
+      First Used: <%= t.weaponYear%>
       <form action="/histories/delete/<%=t._id%>?_method=DELETE" 
         method="POST">
-        <button type="submit" class="btn white-text">Delete war</button>
+        <button type="submit" class="btn white-text">Delete weapon</button>
       </form>
     </a>
     <%}});%>

@@ -11,7 +11,7 @@
     <a class="medieval-a" href="/weapons/ancients/<%= t._id %>">
       Name: <%= t.weaponName%> 
       Type: <%= t.weaponTypeName%>  
-      <%= t.weaponYear.substring(0,4)%>
+      <%= t.weaponYear%>
       <form
         action="/weapons/ancients/delete/<%=t._id%>?_method=DELETE"
         method="POST"

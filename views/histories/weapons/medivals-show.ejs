@@ -1,23 +1,20 @@
 <%- include('../partials/header') %>
 <style class="index_img">
   body {
-    background-image: url("https://www.suyongso.com/files/attach/images/115/773/474/004/99b983892094b5c6d2fc3736e15da7d1.jpg");
-    background-size: 106%;
+    background-image: url("https://i.pinimg.com/originals/6d/5f/86/6d5f860c33e2091930edc97226f8dc88.jpg");
+    background-size: 100%;
   }
 </style>
 <div>
-  <a class="goback" href="/medivals">GO BACK</a>
+  <a class="goback" href="/weapons/medivals">GO BACK</a>
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
-    <li>Name: <%=history.name%></li>
-    <li>Region: <%=history.region%></li>
-    <li>Who: <%=history.involvedStates1%></li>
-    <li>against: <%=history.involvedStates2%></li>
-    <li>From: <%=history.dateFrom%></li>
-    <li>To: <%=history.dateTo%></li>
-    <li>Casualties: <%=history.numberOfLoss%></li>
-    <li>Weapons: <%=history.numberOfLoss%></li>
+    <li>Name: <%=weapon.weaponName%></li>
+    <li>Region: <%=weapon.weaponType%></li>
+    <li>Who: <%=weapon.weaponTypeName%></li>
+    <li>against: <%=weapon.weaponOriginRegion%></li>
+    <li>From: <%=weapon.weaponYear%></li>
   </ul>
 </div>
 

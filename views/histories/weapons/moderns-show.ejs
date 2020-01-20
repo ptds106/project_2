@@ -1,23 +1,20 @@
 <%- include('../partials/header') %>
 <style class="index_img">
   body {
-    background-image: url("https://i.pinimg.com/originals/85/c0/82/85c08274ebc1bff43f17dc9815227e7d.jpg");
+    background-image: url("https://upguardsandatem.files.wordpress.com/2016/07/cavalry-charge.jpeg");
     background-size: 100%;
   }
 </style>
 <div>
-  <a class="goback" href="/moderns">GO BACK</a>
+  <a class="goback" href="/weapons/moderns">GO BACK</a>
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
-    <li>Name: <%=history.name%></li>
-    <li>Region: <%=history.region%></li>
-    <li>Who: <%=history.involvedStates1%></li>
-    <li>against: <%=history.involvedStates2%></li>
-    <li>From: <%=history.dateFrom%></li>
-    <li>To: <%=history.dateTo%></li>
-    <li>Casualties: <%=history.numberOfLoss%></li>
-    <li>Weapons: <%=history.numberOfLoss%></li>
+    <li>Name: <%=weapon.weaponName%></li>
+    <li>Region: <%=weapon.weaponType%></li>
+    <li>Who: <%=weapon.weaponTypeName%></li>
+    <li>against: <%=weapon.weaponOriginRegion%></li>
+    <li>From: <%=weapon.weaponYear%></li>
   </ul>
 </div>
 

@@ -1,20 +1,21 @@
 <%- include('../partials/header') %>
 <style class="index_img">
   body {
-    background-image: url("https://www.suyongso.com/files/attach/images/115/773/474/004/99b983892094b5c6d2fc3736e15da7d1.jpg");
-    background-size: 106%;
+    background-image: url("https://i.pinimg.com/originals/6d/5f/86/6d5f860c33e2091930edc97226f8dc88.jpg");
+    background-size: 100%;
   }
 </style>
-
 <ul class="medieval">
   <li>
-    <%warsSorted.forEach((t, idx) => { if( Number(t.dateFrom.substring(0,4)) >
-    499 && Number(t.dateFrom.substring(0,4)) < 1500) { %>
-    <a class="medieval-a" href="/medivals/<%= t._id %>">
-      <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%=
-      t.dateTo.substring(0,4)%>
-
-      <form action="/medivals/delete/<%=t._id%>?_method=DELETE" method="POST">
+    <%weaponsSorted.forEach((t, idx) => {if(Number(t.weaponYear) > 499 && Number(t.weaponYear) < 1500){ %>
+    <a class="medieval-a" href="/weapons/contemporaries/<%= t._id %>">
+      Name: <%= t.weaponName%> 
+      Type: <%= t.weaponTypeName%>  
+      <%= t.weaponYear%>
+      <form
+        action="/weapons/contemporaries/delete/<%=t._id%>?_method=DELETE"
+        method="POST"
+      >
         <button type="submit" class="btn white-text">Delete war</button>
       </form>
     </a>

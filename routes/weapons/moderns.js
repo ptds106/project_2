@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const modernsCtrl = require('../../controller/wars/moderns');
+const modernsCtrl = require('../../controller/weapons/moderns');
 
 router.get('/', modernsCtrl.index);
 router.get('/:id', modernsCtrl.show);

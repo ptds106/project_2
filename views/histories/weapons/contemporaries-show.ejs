@@ -1,23 +1,20 @@
 <%- include('../partials/header') %>
 <style class="index_img">
   body {
-    background-image: url("https://d.newsweek.com/en/full/816721/grayeagledrone2.jpg?w=1600&h=900&q=88&f=2983e77967ad8bea2e11f1d26d69481c");
+    background-image: url("https://wallpaperaccess.com/full/175454.jpg");
     background-size: 100%;
   }
 </style>
 <div>
-  <a class="goback" href="/contemporaries">GO BACK</a>
+  <a class="goback" href="/weapons/contemporaries">GO BACK</a>
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
-    <li>Name: <%=history.name%></li>
-    <li>Region: <%=history.region%></li>
-    <li>Who: <%=history.involvedStates1%></li>
-    <li>against: <%=history.involvedStates2%></li>
-    <li>From: <%=history.dateFrom%></li>
-    <li>To: <%=history.dateTo%></li>
-    <li>Casualties: <%=history.numberOfLoss%></li>
-    <li>Weapons: <%=history.numberOfLoss%></li>
+    <li>Name: <%=weapon.weaponName%></li>
+    <li>Region: <%=weapon.weaponType%></li>
+    <li>Who: <%=weapon.weaponTypeName%></li>
+    <li>against: <%=weapon.weaponOriginRegion%></li>
+    <li>From: <%=weapon.weaponYear%></li>
   </ul>
 </div>
 

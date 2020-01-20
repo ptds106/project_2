@@ -1,18 +1,21 @@
 <%- include('../partials/header') %>
 <style class="index_img">
   body {
-    background-image: url("https://d.newsweek.com/en/full/816721/grayeagledrone2.jpg?w=1600&h=900&q=88&f=2983e77967ad8bea2e11f1d26d69481c");
+    background-image: url("https://wallpaperaccess.com/full/175454.jpg");
     background-size: 100%;
   }
 </style>
 <ul class="medieval">
   <li>
-    <%warsSorted.forEach((t, idx) => {if(Number(t.dateFrom.substring(0,4)) > 1864) { %>
-    <a class="medieval-a" href="/contemporaries/<%= t._id %>">
-      <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%=
-      t.dateTo.substring(0,4)%>
-      <form action="/contemporaries/delete/<%=t._id%>?_method=DELETE" 
-        method="POST">
+    <%weaponsSorted.forEach((t, idx) => {if(Number(t.weaponYear) > 1864){ %>
+    <a class="medieval-a" href="/weapons/contemporaries/<%= t._id %>">
+      Name: <%= t.weaponName%> 
+      Type: <%= t.weaponTypeName%>  
+      <%= t.weaponYear%>
+      <form
+        action="/weapons/contemporaries/delete/<%=t._id%>?_method=DELETE"
+        method="POST"
+      >
         <button type="submit" class="btn white-text">Delete war</button>
       </form>
     </a>

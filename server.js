@@ -23,7 +23,7 @@ const medivalsRouter = require('./routes/wars/medivals')
 const modernsRouter = require('./routes/wars/moderns')
 const contemporariesRouter = require('./routes/wars/contemporaries')
 
-var weaponsRouter = require('./routes/weapons/weapons');
+var weaponsRouter = require('./routes/weapons/histories');
 const ancientsWeaponsRouter = require('./routes/Weapons/ancients')
 const medivalsWeaponsRouter = require('./routes/Weapons/medivals')
 const modernsWeaponsRouter = require('./routes/Weapons/moderns')

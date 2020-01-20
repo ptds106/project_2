@@ -35,16 +35,37 @@ function index(req, res, next) {
     });
 }
 const create = (req, res) => {
-  console.log("this is create");
+  console.log("this is create weapons");
   const createWeapons = new Weapon(req.body);
-  createWar.save(err => {
-    if (err) return res.redirect("histories/crud/add-weapons");
-    res.redirect("/weapons");
+  createWeapons.save(err => {
+    if (err) return res.redirect("/weapons/add-weapons");
+    res.redirect("/weapons/views");
   });
 };
-
+const indexView = (req, res) => {
+  Weapon.find({}, (err, weapon) => {
+    if (err) {
+      res.render("error");
+    }
+    const sortedWeapons = weapon.sort((a, b) => (a.weaponYear > b.weaponYear) ? 1 : -1)
+    res.render("histories/weapons/histories", {
+      weaponSorted: sortedWeapons,
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name,
+      histories: weapon,
+    });
+  }); 
+}
+const deleteWeapons = (req, res) => {
+  console.log('deleting contemporary ID')
+  Weapon.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+  res.redirect("/views");
+};
 module.exports = {
   index,
+  indexView,
   create,
   new: newWeapon,
+  delete: deleteWeapons,
 };
