@@ -12,7 +12,6 @@
         <a href="/" class = "nav-home">Home</a>
         <div class="dropdown">
           <button class="dropbtn">Historical Wars 
-            <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
             <a href="../ancients">ANCIENT WARS</a>
@@ -22,28 +21,40 @@
           </div>
         </div> 
 
-        <div class="dropdown2">
-            <button class="dropbtn2">Historical Weapons
-              <i class="fa fa-caret-down"></i>
+        <div class="dropdown">
+            <button class="dropbtn">Historical Weapons
             </button>
-            <div class="dropdown-content2">
-              <a href="../ancients">ANCIENT WEAPONS</a>
-              <a href="../medivals">MEDIVAL WEAPONS</a>
-              <a href="../moderns">MODERN WEAPONS</a>
-              <a href="../contemporaries">CONTEMPORARY WEAPONS</a>
+            <div class="dropdown-content">
+              <a href="../weapons/ancients">ANCIENT WEAPONS</a>
+              <a href="../weapons/medivals">MEDIVAL WEAPONS</a>
+              <a href="../weapons/moderns">MODERN WEAPONS</a>
+              <a href="../weapons/contemporaries">CONTEMPORARY WEAPONS</a>
             </div>
           </div> 
-        </div> 
-            
-        <div class="navbar2">
 
+
+              <div class="dropdown">
+                <button class="dropbtn">Historical Weapons
+                </button>
+                <div class="dropdown-content">
+                  <a href="/histories/add-wars">ADD WARS</a>
+                  <a href="../histories/views">VIEW WARS</a>
+                </div>
+              </div> 
+              <div class="dropdown">
+                <button class="dropbtn">Historical Weapons
+                </button>
+                <div class="dropdown-content">
+                  <a href="../weapons/add-weapons">ADD WEAPONS</a>
+                  <a href="../weapons/views">VIEW WEAPONS</a>
+                </div>
+
+              </div>
+              <div class= "log"> 
               <% if (user) { %>
                 <a href="/logout"><i class="log"></i>Log Out</a>
               <% } else { %>
                 <a href="/auth/google"><i class="log"></i>Login with Google</a>
               <% } %>
-              <a href="/">Add/View Weapons</a>
-              <a href="/histories/add-wars">Add/View Wars</a>
+            </div>>
             </div> 
-        
-      </div>

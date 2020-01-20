@@ -1,9 +1,8 @@
-var express = require('express')
-var router = express.Router()
-var weaponsCtrl = require('../controllers/weapons')
+var router = require('express').Router();
+var weaponsCtrl = require('../controller/weapons');
 
+router.get('/', weaponsCtrl.index);
+router.get('/add-weapons', weaponsCtrl.new);
 router.post('/', weaponsCtrl.create)
-router.get('/new', weaponsCtrl.new)
-router.post('/:id', weaponsCtrl.addToFlight)
 
-module.exports = router
+module.exports = router;

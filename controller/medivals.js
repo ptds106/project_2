@@ -11,7 +11,8 @@ const index = (req, res) => {
       warsSorted: sortedWars,
       id: req.params.id,
       user: req.user,
-      name: req.query.name
+      name: req.query.name,
+      histories: war,
     });
   });
 }
@@ -25,7 +26,12 @@ const show = (req, res) => {
         });
       });
 };
+const deleteWars = (req, res) => {
+  History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+  res.redirect("/medivals");
+};
 module.exports = {
   index,
   show,
+  delete: deleteWars,
 };

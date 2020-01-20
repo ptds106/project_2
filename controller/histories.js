@@ -1,9 +1,16 @@
 const History = require("../models/history");
 
 const newWar = (req, res) => {
-  res.render("histories/crud/add-wars", {
-    user: req.user,
-    name: req.query.name,
+  History.find({}, (err, war) => {
+    if (err) {
+      res.render("error");
+    }
+    res.render("histories/crud/add-wars", {
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name,
+      histories: war
+    });
   });
 };
 
@@ -24,35 +31,39 @@ function index(req, res, next) {
       });
     });
 }
-function addWar(req, res, next) {
-  req.user.push(req.body);
-  req.user.save(function(err) {
-    res.redirect("histories/crud/add-wars");
-  });
+const indexView = (req, res) => {
+  History.find({}, (err, war) => {
+    if (err) {
+      res.render("error");
+    }
+    const sortedWars = war.sort((a, b) => (a.dateFrom > b.dateFrom) ? 1 : -1)
+    res.render("histories/wars/histories", {
+      warsSorted: sortedWars,
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name,
+      histories: war,
+    });
+  }); 
 }
 
 const create = (req, res) => {
-
- console.log("this is create")
- const war = new History(req.body);
- war.save(err => {
-   if (err) return res.redirect("histories/crud/add-wars");
-   res.redirect("/histories");
- });
- console.log(war)
-};
-
-
-function delWar(req, res, next) {
-  req.user.facts.pop();
-  req.user.save(function(err) {
+  console.log("this is create");
+  const createWar = new History(req.body);
+  createWar.save(err => {
+    if (err) return res.redirect("histories/crud/add-wars");
     res.redirect("/histories");
   });
-}
+};
+const deleteWars = (req, res) => {
+  console.log('deleting contemporary ID')
+  History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+  res.redirect("/histories");
+};
 module.exports = {
   index,
+  indexView,
   create,
   new: newWar,
-  addWar,
-  delete: delWar
+  delete: deleteWars,
 };

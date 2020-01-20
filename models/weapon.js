@@ -5,10 +5,11 @@ const weaponsSchema = new Schema({
   weaponName: { type: String, required: true, unique: true },
   weaponType: { type: String, enum: ["melee", "range"] },
   weaponTypeName: { type: String },
-  weaponRegion: {
+  weaponOriginRegion: {
     type: String,
     enum: ["North America", "South America", "Europe", "Asia", "Africa"]
   },
+  weaponYear: { type: Number},
   history: [{ type: Schema.Types.ObjectId, ref: "History" }]
 });
 

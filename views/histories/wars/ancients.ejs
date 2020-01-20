@@ -1,8 +1,21 @@
 <%- include('../partials/header') %>
-    <style class = "index_img">
-        body {
-          background-image: url('https://steamuserimages-a.akamaihd.net/ugc/922544126428224433/D837FEF4A0500F7395FDB26034746110C54DF8EB/');
-          background-size: 100%
-        }
-        </style>
-  <%- include('../partials/footer') %>
+<style class="index_img">
+  body {
+    background-image: url("https://steamuserimages-a.akamaihd.net/ugc/922544126428224433/D837FEF4A0500F7395FDB26034746110C54DF8EB/");
+    background-size: 100%;
+  }
+</style>
+<ul class="medieval">
+  <li>
+    <%warsSorted.forEach((t, idx) => {if(Number(t.dateFrom.substring(0,4)) < 500) { %>
+    <a class="medieval-a" href="/ancients/<%= t._id %>">
+      <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%= t.dateTo.substring(0,4)%>
+      <form action="/ancients/delete/<%=t._id%>?_method=DELETE" 
+        method="POST">
+        <button type="submit" class="btn white-text">Delete war</button>
+      </form>
+    </a>
+    <%}});%>
+  </li>
+</ul>
+<%- include('../partials/footer') %>

@@ -18,6 +18,7 @@ require('./config/database');
 
 var indexRouter = require('./routes/index');
 var historyRouter = require('./routes/histories');
+var weaponsRouter = require('./routes/weapons');
 const ancientsRouter = require('./routes/ancients')
 const medivalsRouter = require('./routes/medivals')
 const modernsRouter = require('./routes/moderns')
@@ -44,6 +45,7 @@ app.use(methodOverride('_method'))
 
 app.use('/', indexRouter);
 app.use('/', historyRouter);
+app.use('/weapons', weaponsRouter);
 app.use('/ancients', ancientsRouter)
 app.use('/medivals', medivalsRouter)
 app.use('/moderns', modernsRouter)
