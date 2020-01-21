@@ -1,12 +1,12 @@
 <%- include('../partials/header') %>
 <style class="index_img">
   body {
-    background-image: url("https://assets.change.org/photos/7/yf/pa/NmYFpAwjUFWRxkp-1600x900-noPad.jpg?1527092760");
-    background-size: 106%;
+    background-image: url("https://www.myjewishlearning.com/wp-content/uploads/2003/02/torah-scroll.jpg");
+    background-size: 100%;
   }
 </style>
 <div>
-  <a class="goback" href="/medivals">GO BACK</a>
+  <a class="goback" href="/histories/views">GO BACK</a>
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
@@ -23,16 +23,21 @@
 <div class= "facts-div">
   <ul class= "facts-ul">
     <li class= "facts-li">
-
+      <%for(let i = 0; i < history.comments.length; i++) {%>
+        <%= history.comments[i]%>
+        <%};%>
   </li>
 </ul>
 </div>
 
 <div class= facts-text>
+  <form action="/histories" method="POST">
 facts:<br>
-<textarea name="facts" rows="6" cols="40">
+<textarea class="textarea" name="facts" rows="4" cols="45">
 </textarea>
+<br/>
+<input type="submit">
+</form>
 </div>
-
 
 <%- include('../partials/footer') %>

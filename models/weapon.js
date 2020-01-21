@@ -10,6 +10,7 @@ const weaponsSchema = new Schema({
     enum: ["North America", "South America", "Europe", "Asia", "Africa"]
   },
   weaponYear: { type: Number},
+  facts: {type: String},
   comments: [{type: String}],
   history: [{ type: Schema.Types.ObjectId, ref: "History" }]
 });

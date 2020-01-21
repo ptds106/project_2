@@ -34,6 +34,16 @@ function index(req, res, next) {
       });
     });
 }
+const show = (req, res) => {
+  Weapon.findById(req.params.id, (err, weapons) => {
+        res.render('histories/weapons/histories-show', { 
+          weapons,
+          user: req.user,
+          name: req.query.name
+        });
+      });
+};
+
 const create = (req, res) => {
   console.log("this is create weapons");
   const createWeapons = new Weapon(req.body);
@@ -66,6 +76,7 @@ module.exports = {
   index,
   indexView,
   create,
+  show,
   new: newWeapon,
   delete: deleteWeapons,
 };

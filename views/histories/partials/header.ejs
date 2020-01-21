@@ -37,7 +37,9 @@
                 <button class="dropbtn">Historical Weapons
                 </button>
                 <div class="dropdown-content">
+                    <% if (user){ %>
                   <a href="/histories/add-wars">ADD WARS</a>
+                  <% } %>
                   <a href="/histories/views">VIEW WARS</a>
                 </div>
               </div> 
@@ -45,7 +47,9 @@
                 <button class="dropbtn">Historical Weapons
                 </button>
                 <div class="dropdown-content">
+                    <% if (user){ %>
                   <a href="/weapons/add-weapons">ADD WEAPONS</a>
+                  <% } %>
                   <a href="/weapons/views">VIEW WEAPONS</a>
                 </div>
 

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var casualtySchema = new Schema({
-  text: String
+const casualtySchema = new Schema({
+  casualty: String
 });
 
 const historiesSchema = new Schema({
@@ -22,6 +22,7 @@ const historiesSchema = new Schema({
       return Number(new Date().getFullYear()) + 1;
     }
   },
+  facts: {type: String},
   comments: [{type: String}],
   casualties: [casualtySchema],
   weapon: [{type: Schema.Types.ObjectId, ref: 'Weapon'}]

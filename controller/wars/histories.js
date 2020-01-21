@@ -14,23 +14,21 @@ const newWar = (req, res) => {
     });
   });
 };
-function index(req, res, next) {
-  let modelQuery = req.query.name
-    ? { name: new RegExp(req.query.name, "i") }
-    : {};
-  let sortKey = req.query.sort || "name";
-  History.find(modelQuery)
-    .sort(sortKey)
-    .exec(function(err, histories) {
-      if (err) return next(err);
-      res.render("index", {
-        histories,
-        user: req.user,
-        name: req.query.name,
-        sortKey
-      });
+const index = (req, res) => {
+  History.find({}, (err, war) => {
+    if (err) {
+      res.render("error");
+    }
+    const sortedWars = war.sort((a, b) => (a.dateFrom > b.dateFrom ? 1 : -1));
+    res.render("index", {
+      warsSorted: sortedWars,
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name,
+      histories: war
     });
-}
+  });
+};
 const indexView = (req, res) => {
   History.find({}, (err, war) => {
     if (err) {
@@ -42,21 +40,29 @@ const indexView = (req, res) => {
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: war
+      histories: war,
     });
   });
 };
-
+const show = (req, res) => {
+  console.log("you are in history show")
+  History.findById(req.params.id, (err, history) => {
+        res.render('histories/wars/histories-show', { 
+          history,
+          user: req.user,
+          name: req.query.name
+        });
+      });
+};
 const create = (req, res) => {
-  console.log("this is create");
+  console.log("this is create req.body", req.body);
   const createWar = new History(req.body);
   createWar.save(err => {
-    if (err) return res.redirect("histories/crud/add-wars");
+    if (err) return res.redirect("error");
     res.redirect("/histories/views");
   });
 };
 const deleteWars = (req, res) => {
-  console.log("deleting contemporary ID");
   History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   res.redirect("/histories/views");
 };
@@ -82,6 +88,7 @@ module.exports = {
   index,
   indexView,
   create,
+  show,
   new: newWar,
   delete: deleteWars,
   edit,

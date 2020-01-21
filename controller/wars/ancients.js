@@ -31,9 +31,9 @@ const deleteWars = (req, res) => {
   History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   res.redirect("/ancients");
 };
-function addComments(req, res, next) {
+function addFacts(req, res, next) {
   console.log(req.body)
-  // req.user.comments.push(req.body);
+  // req.user.Facts.push(req.body);
   // req.user.save(function(err) {
     res.redirect('/ancients/:id');
 }
@@ -42,5 +42,5 @@ module.exports = {
   index,
   show,
   delete: deleteWars,
-  addComments,
+  addFacts,
 };
