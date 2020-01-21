@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const casualtySchema = new Schema({
-  numberOfLoss: {type: Number}
+var casualtySchema = new Schema({
+  text: String
 });
 
 const historiesSchema = new Schema({

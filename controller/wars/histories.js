@@ -14,7 +14,6 @@ const newWar = (req, res) => {
     });
   });
 };
-
 function index(req, res, next) {
   let modelQuery = req.query.name
     ? { name: new RegExp(req.query.name, "i") }
@@ -53,13 +52,13 @@ const create = (req, res) => {
   const createWar = new History(req.body);
   createWar.save(err => {
     if (err) return res.redirect("histories/crud/add-wars");
-    res.redirect("/histories");
+    res.redirect("/histories/views");
   });
 };
 const deleteWars = (req, res) => {
   console.log("deleting contemporary ID");
   History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-  res.redirect("/histories");
+  res.redirect("/histories/views");
 };
 const edit = (req, res) => {
   History.findById(req.params.id, (err, history) => {
@@ -78,6 +77,7 @@ const update = (req, res) => {
     res.redirect("/histories/views");
   });
 };
+
 module.exports = {
   index,
   indexView,
