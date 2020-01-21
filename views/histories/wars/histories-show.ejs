@@ -21,23 +21,23 @@
   </ul>
 </div>
 <div class= "facts-div">
-  <ul class= "facts-ul">
-    <li class= "facts-li">
-      <%for(let i = 0; i < history.comments.length; i++) {%>
-        <%= history.comments[i]%>
-        <%};%>
-  </li>
-</ul>
-</div>
-
-<div class= facts-text>
-  <form action="/histories" method="POST">
-facts:<br>
-<textarea class="textarea" name="facts" rows="4" cols="45">
-</textarea>
-<br/>
-<input type="submit">
-</form>
-</div>
-
+    <ul class= "facts-ul">
+      <li class= "facts-li">
+        <%for(let i = 0; i < history.comments.length; i++) {%>
+          <%= history.comments[i]%>
+          <%};%>
+    </li>
+  </ul>
+  </div>
+  
+  <div class= facts-text>
+    <form action="/ancients" method="POST">
+  facts:<br>
+  <textarea class="textarea" name="facts" rows="4" cols="40">
+  </textarea>
+  <br/>
+  <input type="submit">
+  </form>
+  </div>
+  
 <%- include('../partials/footer') %>

@@ -18,8 +18,10 @@ const index = (req, res) => {
 };
 const show = (req, res) => {
   History.findById(req.params.id, (err, history) => {
+    console.log(req.user)
     res.render("histories/wars/ancients-show", {
       history,
+      id: req.params.id,
       user: req.user,
       name: req.query.name
     });
@@ -31,16 +33,17 @@ const deleteWars = (req, res) => {
   History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   res.redirect("/ancients");
 };
-function addFacts(req, res, next) {
-  console.log(req.body)
-  // req.user.Facts.push(req.body);
-  // req.user.save(function(err) {
+function addComments(req, res, next) {
+  // console.log(req.user.history)
+  req.history.push(req.body.comments);
+  req.history.save(function(err) {
     res.redirect('/ancients/:id');
+  });
 }
 
 module.exports = {
   index,
   show,
   delete: deleteWars,
-  addFacts,
+  addComments,
 };

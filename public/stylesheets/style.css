@@ -1,6 +1,8 @@
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow: auto;
+  height: 100%;
 }
 .ancient_history {
   width: 90%;
@@ -43,6 +45,7 @@ body {
   background-color: inherit;
   font-family: inherit;
   min-width: 256px;
+  width: 100%;
 }
 .dropdown-content {
   display: none;
@@ -59,7 +62,7 @@ body {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  text-align: left;
+  text-align: center;
 }
 
 .dropdown-content a:hover {
@@ -111,7 +114,7 @@ body {
   min-width: 500px;
   min-height: 600px;
   background-color: lightgray;
-  opacity: .3;
+  opacity: .8;
 }
 .medival-ul {
   list-style-type: none;
@@ -121,12 +124,12 @@ body {
 .goback {
   font-size: 20px;
   position: absolute;
-  top: 73px;
-  left: 36px;
+  bottom: 73px;
+  left: 420px;
   border: 1px solid black;
   border-radius: 6px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   text-decoration: none;
 }
 .log {

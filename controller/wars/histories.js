@@ -1,5 +1,6 @@
+var User = require("../../models/user");
 const History = require("../../models/history");
-var weapon = require("../../models/weapon");
+
 
 const newWar = (req, res) => {
   History.find({}, (err, war) => {
@@ -45,7 +46,6 @@ const indexView = (req, res) => {
   });
 };
 const show = (req, res) => {
-  console.log("you are in history show")
   History.findById(req.params.id, (err, history) => {
         res.render('histories/wars/histories-show', { 
           history,
@@ -55,12 +55,12 @@ const show = (req, res) => {
       });
 };
 const create = (req, res) => {
-  console.log("this is create req.body", req.body);
   const createWar = new History(req.body);
   createWar.save(err => {
     if (err) return res.redirect("error");
     res.redirect("/histories/views");
   });
+
 };
 const deleteWars = (req, res) => {
   History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});

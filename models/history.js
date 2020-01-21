@@ -23,7 +23,7 @@ const historiesSchema = new Schema({
     }
   },
   facts: {type: String},
-  comments: [{type: String}],
+  comments: [{String}],
   casualties: [casualtySchema],
   weapon: [{type: Schema.Types.ObjectId, ref: 'Weapon'}]
 });

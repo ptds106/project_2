@@ -23,17 +23,18 @@
 <div class= "facts-div">
   <ul class= "facts-ul">
     <li class= "facts-li">
-      <%for(let i = 0; i < history.facts.length; i++) {%>
-        <%= history.facts[i]%>
+      <%for(let i = 0; i < history.comments.length; i++) {%>
+        <%= history.comments[i]%>
+
         <%};%>
   </li>
 </ul>
 </div>
 
 <div class= facts-text>
-  <form action="/ancients" method="POST">
+  <form action="/ancients/comments" method="POST">
 facts:<br>
-<textarea class="textarea" name="facts" rows="4" cols="40">
+<textarea class="textarea" name="comments" rows="4" cols="45">
 </textarea>
 <br/>
 <input type="submit">

@@ -30,8 +30,16 @@ const deleteWars = (req, res) => {
     History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
     res.redirect("/contemporaries");
   };
+  const addComments = (req, res, next) => {
+    req.user.Comments.push(req.body);
+    req.user.save(function(err) {
+      res.redirect('/students');
+    });
+  }
+
 module.exports = {
   index,
   show,
   delete: deleteWars,
+  addComments,
 };
