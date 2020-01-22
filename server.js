@@ -14,6 +14,7 @@ require("./config/passport");
 require("./config/database");
 
 var indexRouter = require("./routes/index");
+
 var historyRouter = require("./routes/wars/histories");
 const ancientsRouter = require("./routes/wars/ancients");
 const medivalsRouter = require("./routes/wars/medivals");
@@ -47,7 +48,7 @@ app.use(methodOverride("_method"));
 
 app.use("/", indexRouter);
 app.use("/", historyRouter);
-app.use("/weapons", weaponsRouter);
+
 app.use("/ancients", ancientsRouter);
 app.use("/medivals", medivalsRouter);
 app.use("/moderns", modernsRouter);
@@ -57,7 +58,7 @@ app.use("/weapons/ancients", ancientsWeaponsRouter);
 app.use("/weapons/medivals", medivalsWeaponsRouter);
 app.use("/weapons/moderns", modernsWeaponsRouter);
 app.use("/weapons/contemporaries", contemporariesWeaponsRouter);
-
+app.use("/weapons", weaponsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -12,12 +12,7 @@
       Name: <%= t.weaponName%> 
       Type: <%= t.weaponTypeName%>  
       <%= t.weaponYear%>
-      <form
-        action="/weapons/contemporaries/delete/<%=t._id%>?_method=DELETE"
-        method="POST"
-      >
-        <button type="submit" class="btn white-text">Delete war</button>
-      </form>
+
     </a>
     <%}});%>
   </li>

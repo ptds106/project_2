@@ -1,38 +1,66 @@
 const History = require("../../models/history");
-var weapon = require("../../models/weapon");
-
+var User = require("../../models/user");
+var Comment = require("../../models/comment");
 const index = (req, res) => {
   History.find({}, (err, war) => {
     if (err) {
       res.render("error");
     }
-    const sortedWars = war.sort((a, b) => (a.dateFrom > b.dateFrom) ? 1 : -1)
+    const sortedWars = war.sort((a, b) => (a.dateFrom > b.dateFrom ? 1 : -1));
     res.render("histories/wars/moderns", {
       warsSorted: sortedWars,
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: war,
+      histories: war
+    });
+  });
+};
+const show = (req, res) => {
+  History.findById(req.params.id, (err, history) => {
+    Comment.find({}, (err, comments) => {
+      res.render("histories/wars/moderns-show", {
+        history,
+        id: req.params.id,
+        user: req.user,
+        name: req.query.name,
+        comments
+      });
+    });
+  });
+};
+
+function addComments(req, res, next) {
+  const comment = new Comment(req.body);
+  comment.save(err => {
+    if (err) res.redirect("error");
+    req.user.comments.push(comment);
+    History.findById(req.params.id, (err, history) => {
+      req.user.save(function(err) {
+        history.comments.push(comment);
+        history.save();
+        res.redirect(`/moderns/${req.params.id}`);
+      });
     });
   });
 }
-const show = (req, res) => {
-  History.findById(req.params.id, (err, history) => {
-        res.render('histories/wars/moderns-show', { 
-          history,
-          user: req.user,
-          name: req.query.name
-        });
-      });
-};
 const deleteWars = (req, res) => {
-  console.log('deleting contemporary ID')
-  History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-  res.redirect("/moderns");
-};
+  History.find({ comments: req.params.id }, (err, history) => {
+    let array = history[0].comments;
+    array.splice(array.indexOf(req.params.id), 1);
+    history[0].save();
 
+    User.findById(req.user).exec((err, user) => {
+      user.comments.splice(user.comments.indexOf(req.params.id), 1);
+      user.save();
+    });
+    Comment.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+    res.redirect(`/moderns/${history[0].id}`);
+  });
+};
 module.exports = {
   index,
   show,
-  delete: deleteWars,
+  addComments,
+  delete: deleteWars
 };

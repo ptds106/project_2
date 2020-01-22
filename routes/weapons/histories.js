@@ -2,10 +2,12 @@ var router = require('express').Router();
 var weaponsCtrl = require('../../controller/weapons/weapons');
 
 router.get('/', weaponsCtrl.index);
-router.get('/views', weaponsCtrl.indexView);
 router.get('/add-weapons', weaponsCtrl.new);
-router.post('/', weaponsCtrl.create)
+router.post('/', weaponsCtrl.create);
+router.get('/views', weaponsCtrl.indexView);
 router.get('/:id', weaponsCtrl.show);
 router.delete('/delete/:id', weaponsCtrl.delete);
+router.get('/edit/:id', weaponsCtrl.edit)
+router.put('/update/:id', weaponsCtrl.update)
 
 module.exports = router;

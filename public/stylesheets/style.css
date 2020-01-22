@@ -140,6 +140,7 @@ body {
   float: right;
   text-align: center;
   list-style-type: none;
+  overflow: auto;
 }
 .history-a {
   font-size: 20px;
@@ -170,6 +171,7 @@ body {
   display: block;
   position: relative;
   background-color: lightgray;
+  opacity: .8;
 ;
 }
 .facts-ul{

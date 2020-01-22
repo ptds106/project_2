@@ -15,7 +15,7 @@
           </button>
           <div class="dropdown-content">
             <a href="/ancients">ANCIENT WARS</a>
-            <a href="/medivals">MEDIVAL WARS</a>
+            <a href="/medivals">MEDIEVAL WARS</a>
             <a href="/moderns">PRE-MODERN WARS</a>
             <a href="/contemporaries">MODERN WARS</a>
           </div>
@@ -26,34 +26,36 @@
             </button>
             <div class="dropdown-content">
               <a href="/weapons/ancients">ANCIENT WEAPONS</a>
-              <a href="/weapons/medivals">MEDIVAL WEAPONS</a>
+              <a href="/weapons/medivals">MEDIEVAL WEAPONS</a>
               <a href="/weapons/moderns">PRE-MODERN WEAPONS</a>
               <a href="/weapons/contemporaries">MODERN WEAPONS</a>
             </div>
           </div> 
 
+          <% if (user){ %>
+              <div class="dropdown">
+                <button class="dropbtn">ADD/EDIT Wars
+                </button>
+                <div class="dropdown-content">
 
-              <div class="dropdown">
-                <button class="dropbtn">Historical Weapons
-                </button>
-                <div class="dropdown-content">
-                    <% if (user){ %>
                   <a href="/histories/add-wars">ADD WARS</a>
-                  <% } %>
-                  <a href="/histories/views">VIEW WARS</a>
+                  <a href="/histories/views">EDIT WARS</a>
                 </div>
-              </div> 
+              </div>
+              <% } %>
+              <% if (user){ %> 
               <div class="dropdown">
-                <button class="dropbtn">Historical Weapons
+                <button class="dropbtn">ADD/EDIT Weapons
                 </button>
                 <div class="dropdown-content">
-                    <% if (user){ %>
+
                   <a href="/weapons/add-weapons">ADD WEAPONS</a>
-                  <% } %>
-                  <a href="/weapons/views">VIEW WEAPONS</a>
+
+                  <a href="/weapons/views">EDIT WEAPONS</a>
                 </div>
 
               </div>
+              <% } %>
               <div class= "log"> 
               <% if (user) { %>
                 <a href="/logout"><i class="log"></i>Log Out</a>

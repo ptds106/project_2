@@ -16,8 +16,7 @@
     <li>against: <%=history.involvedStates2%></li>
     <li>From: <%=history.dateFrom%></li>
     <li>To: <%=history.dateTo%></li>
-    <li>Casualties: <%=history.numberOfLoss%></li>
-    <li>Weapons: <%=history.numberOfLoss%></li>
+    <li>Casualties: <%=history.casualties%></li>
   </ul>
 </div>
 <div class= "facts-div">
@@ -31,7 +30,7 @@
   </div>
   
   <div class= facts-text>
-    <form action="/ancients" method="POST">
+    <form action="/histories" method="POST">
   facts:<br>
   <textarea class="textarea" name="facts" rows="4" cols="40">
   </textarea>

@@ -13,10 +13,6 @@
     <a class="medieval-a" href="/medivals/<%= t._id %>">
       <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%=
       t.dateTo.substring(0,4)%>
-
-      <form action="/medivals/delete/<%=t._id%>?_method=DELETE" method="POST">
-        <button type="submit" class="btn white-text">Delete war</button>
-      </form>
     </a>
     <%}});%>
   </li>

@@ -1,6 +1,6 @@
 var User = require("../../models/user");
 const History = require("../../models/history");
-
+var Comment = require("../../models/comment");
 
 const newWar = (req, res) => {
   History.find({}, (err, war) => {
@@ -31,6 +31,7 @@ const index = (req, res) => {
   });
 };
 const indexView = (req, res) => {
+  console.log(req.user.history);
   History.find({}, (err, war) => {
     if (err) {
       res.render("error");
@@ -41,31 +42,45 @@ const indexView = (req, res) => {
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: war,
+      histories: war
     });
   });
 };
 const show = (req, res) => {
   History.findById(req.params.id, (err, history) => {
-        res.render('histories/wars/histories-show', { 
-          history,
-          user: req.user,
-          name: req.query.name
-        });
-      });
+    res.render("histories/wars/histories-show", {
+      history,
+      user: req.user,
+      name: req.query.name
+    });
+  });
 };
 const create = (req, res) => {
   const createWar = new History(req.body);
   createWar.save(err => {
+    req.user.history.push(createWar);
+    req.user.save();
     if (err) return res.redirect("error");
     res.redirect("/histories/views");
   });
+};
 
-};
 const deleteWars = (req, res) => {
-  History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-  res.redirect("/histories/views");
+  History.find({ comments: req.params.id }, (err, history) => {
+    let array = history[0].comments;
+    array.splice(array.indexOf(req.params.id), 1);
+    history[0].save();
+
+    User.findById(req.user).exec((err, user) => {
+      user.comments.splice(user.comments.indexOf(req.params.id), 1);
+      user.history.splice(user.history.indexOf(req.params.id), 1);
+      user.save();
+    });
+    Comment.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+    res.redirect("/histories/views")
+  });
 };
+
 const edit = (req, res) => {
   History.findById(req.params.id, (err, history) => {
     res.render("histories/crud/edit-wars", {

@@ -11,8 +11,9 @@ const weaponsSchema = new Schema({
   },
   weaponYear: { type: Number},
   facts: {type: String},
-  comments: [{type: String}],
+  comments: [{type: Schema.Types.ObjectId, ref: 'Comments'}],
   history: [{ type: Schema.Types.ObjectId, ref: "History" }]
+
 });
 
 module.exports = mongoose.model("Weapon", weaponsSchema);

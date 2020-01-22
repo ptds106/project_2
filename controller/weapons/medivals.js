@@ -1,5 +1,6 @@
-const History = require("../../models/history");
 var Weapon = require("../../models/weapon");
+var User = require("../../models/user");
+var Comment = require("../../models/comment");
 
 const index = (req, res) => {
   Weapon.find({}, (err, weapon) => {
@@ -20,22 +21,49 @@ const index = (req, res) => {
 };
 const show = (req, res) => {
   Weapon.findById(req.params.id, (err, weapon) => {
-    res.render("histories/weapons/medivals-show", {
-      weapon,
-      user: req.user,
-      name: req.query.name
+    Comment.find({}, (err, comments) => {
+      res.render("histories/weapons/medivals-show", {
+        weapon,
+        id: req.params.id,
+        user: req.user,
+        name: req.query.name,
+        comments
+      });
     });
   });
 };
 
+function addComments(req, res, next) {
+  const comment = new Comment(req.body);
+  comment.save(err => {
+    if (err) res.redirect("error");
+    req.user.comments.push(comment);
+    Weapon.findById(req.params.id, (err, weapon) => {
+      req.user.save(function(err) {
+        weapon.comments.push(comment);
+        weapon.save();
+        res.redirect(`/weapon/medivals/${req.params.id}`);
+      });
+    });
+  });
+}
 const deleteWars = (req, res) => {
-  console.log("deleting contemporary ID");
-  Weapon.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-  res.redirect("/weapons/medivals");
-};
+  Weapon.find({ comments: req.params.id }, (err, weapon) => {
+    let array = weapon[0].comments;
+    array.splice(array.indexOf(req.params.id), 1);
+    weapon[0].save();
 
+    User.findById(req.user).exec((err, user) => {
+      user.comments.splice(user.comments.indexOf(req.params.id), 1);
+      user.save();
+    });
+    Comment.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+    res.redirect(`/weapon/medivals/${weapon[0].id}`);
+  });
+};
 module.exports = {
   index,
   show,
+  addComments,
   delete: deleteWars
 };

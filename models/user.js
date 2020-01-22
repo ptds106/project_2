@@ -17,7 +17,11 @@ const userSchema = new mongoose.Schema({
     googleId: String,
     history: [{
         type: Schema.Types.ObjectId,
-        ref: 'history'
+        ref: 'History'
+    }],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
     }],
     weapons: [{
         type: Schema.Types.ObjectId,

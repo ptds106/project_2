@@ -11,14 +11,17 @@ body {
     <%weaponSorted.forEach((t, idx) => {if(Number(t.weaponYear > -9999)) { %>
     <a class="history-a" href="/weapons/<%= t._id %>">
       Name: <%= t.weaponName%> 
-      melee or range: <%= t.weaponType%>
       Type: <%= t.weaponTypeName%>
-      region: <%= t.weaponOriginRegion%>
       First Used: <%= t.weaponYear%>
+      <div class="update">
       <form action="/weapons/delete/<%=t._id%>?_method=DELETE" 
         method="POST">
         <button type="submit" class="btn white-text">Delete weapon</button>
       </form>
+      <form action="/weapons/edit/<%=t._id%>">
+        <button type="Edit"class="histories-button">Update weapon </button>
+        </form>
+      </div>
     </a>
     <%}});%>
   </li>

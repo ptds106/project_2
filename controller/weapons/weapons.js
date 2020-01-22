@@ -1,6 +1,7 @@
 const Weapon = require("../../models/weapon");
 const History = require("../../models/history");
-
+var User = require("../../models/user");
+var Comment = require("../../models/comment");
 
 const newWeapon = (req, res) => {
   console.log('you are in weapon')
@@ -34,15 +35,6 @@ function index(req, res, next) {
       });
     });
 }
-const show = (req, res) => {
-  Weapon.findById(req.params.id, (err, weapons) => {
-        res.render('histories/weapons/histories-show', { 
-          weapons,
-          user: req.user,
-          name: req.query.name
-        });
-      });
-};
 
 const create = (req, res) => {
   console.log("this is create weapons");
@@ -67,11 +59,39 @@ const indexView = (req, res) => {
     });
   }); 
 }
+const show = (req, res) => {
+  Weapon.findById(req.params.id, (err, weapon) => {
+        res.render('histories/weapons/histories-show', { 
+          weapon,
+          user: req.user,
+          name: req.query.name
+        });
+      });
+};
+
 const deleteWeapons = (req, res) => {
   console.log('deleting contemporary ID')
   Weapon.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   res.redirect("/views");
 };
+const edit = (req, res) => {
+  Weapon.findById(req.params.id, (err, weapon) => {
+    res.render("histories/crud/edit-weapons", {
+      histories: weapon,
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name
+    });
+  });
+};
+
+const update = (req, res) => {
+  Weapon.findByIdAndUpdate(req.params.id, req.body, (err, weapon) => {
+    if (err) return res.status(500).send(err);
+    res.redirect("/views");
+  });
+};
+
 module.exports = {
   index,
   indexView,
@@ -79,4 +99,6 @@ module.exports = {
   show,
   new: newWeapon,
   delete: deleteWeapons,
+  edit,
+  update
 };

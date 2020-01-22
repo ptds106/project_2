@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const casualtySchema = new Schema({
-  casualty: String
-});
-
 const historiesSchema = new Schema({
   name: {type: String, default: 'needs updates'},
   region: { type: String, default: 'needs updates'},
@@ -23,10 +19,10 @@ const historiesSchema = new Schema({
     }
   },
   facts: {type: String},
-  comments: [{String}],
-  casualties: [casualtySchema],
+  comments: [{type: Schema.Types.ObjectId, ref: 'Comments'}],
+  casualties: String,
   weapon: [{type: Schema.Types.ObjectId, ref: 'Weapon'}]
 });
 
-module.exports = mongoose.model("history", historiesSchema);
+module.exports = mongoose.model("History", historiesSchema);
 

@@ -8,18 +8,20 @@ body {
 
 <ul class="history-view">
   <li>
-    <%warsSorted.forEach((t, idx) => {if(Number(t.dateFrom.substring(0,4)) > -9999) { %>
-    <a class="history-a" href="/histories/<%= t._id %>">
-      <%= t.name%> in <%= t.region%> from: <%= t.dateFrom.substring(0,4)%> ~ <%= t.dateTo.substring(0,4)%>
+    <%warsSorted.forEach((w, idx) => {if(Number(w.dateFrom.substring(0,4)) > -9999) { %>
+    <a class="history-a" href="/histories/<%= w._id %>">
+      <%= w.name%> in <%= w.region%> from: <%= w.dateFrom.substring(0,4)%> ~ <%= w.dateTo.substring(0,4)%>
+      <%if(user.history.includes(w._id)) {%>
       <div class="update">
-      <form action="/histories/delete/<%=t._id%>?_method=DELETE" 
+      <form action="/histories/delete/<%=w._id%>?_method=DELETE" 
         method="POST">
         <button type="submit" class="histories-button">Delete war</button>
       </form>
-      <form action="/histories/edit/<%=t._id%>">
-        <button type="Edit"class="histories-button">Update ETA </button>
+      <form action="/histories/edit/<%=w._id%>">
+        <button type="Edit"class="histories-button">Update war </button>
         </form>
       </div>
+      <%}%>
     </a>
     <%}});%>
   </li>
