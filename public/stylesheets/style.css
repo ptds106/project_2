@@ -83,12 +83,17 @@ body {
   text-align: right;
 }
 .medieval {
-  float: left;
+  float: right;
   text-align: center;
   list-style-type: none;
-
+}
+.show-li{
+  margin: 5px 0px 0px 0px;
 }
 .medieval-a {
+
+  opacity: 0.9;
+  background-color: lightgray;
   font-size: 20px;
   color: black;
   font-weight: bold;
@@ -97,38 +102,44 @@ body {
   text-decoration: none;
   display: block;
   border: 2px solid black;
+  padding: 5px 5px 5px 5px;
 }
 .medieval-a a:hover {
   color: white;
   background-color: #333;
 }
 .medival-show {
+  overflow: auto;
   border: 5px solid black;
   border-radius: 20px;
   font-size: 30px;
   font-weight: bold;
   margin: 10px 0px 0px 0px;
+  padding: 0px 0px 0px 20px;
   float: left;
-  text-align: center;
+  text-align: left;
   list-style-type: none;
   min-width: 500px;
   min-height: 600px;
+  max-width: 500.01px;
+  max-height: 600.01px;
   background-color: lightgray;
-  opacity: .8;
+  opacity: .79;
 }
 .medival-ul {
   list-style-type: none;
-  padding: 0px 0px 0px 0px
+  padding: 0px 0px 0px 0px;
 }
 
 .goback {
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
   position: absolute;
-  bottom: 73px;
-  left: 420px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background-color: white;
+  top: 80px;
+  left: 750px;
+  border: 5px solid black;
+  border-radius: 20px;
+  background-color:lightgray;
   color: black;
   text-decoration: none;
 }
@@ -161,17 +172,20 @@ body {
 
 
 .facts-div {  
+  overflow: auto;
   margin: 20px 20px;
   border: 5px solid black;
   border-radius: 20px;
   min-height: 445px;
+  max-height: 445.1px;
   min-width: 505px;
+  max-width: 505.1px;
   float: right;
   list-style: none;
   display: block;
   position: relative;
   background-color: lightgray;
-  opacity: .8;
+  opacity: .75;
 ;
 }
 .facts-ul{

@@ -47,10 +47,14 @@ const indexView = (req, res) => {
 };
 const show = (req, res) => {
   History.findById(req.params.id, (err, history) => {
-    res.render("histories/wars/histories-show", {
-      history,
-      user: req.user,
-      name: req.query.name
+    Comment.find({}, (err, comments) => {
+      res.render("histories/wars/histories-show", {
+        history,
+        id: req.params.id,
+        user: req.user,
+        name: req.query.name,
+        comments
+      });
     });
   });
 };
@@ -72,7 +76,7 @@ const deleteWars = (req, res) => {
           h.comments.forEach((c, idx) => {
             Comment.findOneAndDelete({ _id: c }, (err, deletedItem) => {});
             user.comments.splice(user.comments.indexOf(c), 1);
-            user.history.splice(user.history.indexOf(req.params.id), 1)
+            user.history.splice(user.history.indexOf(req.params.id), 1);
             user.save();
           });
         }
@@ -80,7 +84,6 @@ const deleteWars = (req, res) => {
     });
     History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   });
-
   res.redirect("/histories/views");
 };
 

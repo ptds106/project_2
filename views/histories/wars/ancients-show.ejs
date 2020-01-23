@@ -10,39 +10,41 @@
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
-    <li>Name: <%=history.name%></li>
-    <li>Region: <%=history.region%></li>
-    <li>Who: <%=history.involvedStates1%></li>
-    <li>against: <%=history.involvedStates2%></li>
-    <li>From: <%=history.dateFrom%></li>
-    <li>To: <%=history.dateTo%></li>
-    <li>Casualties: <%=history.numberOfLoss%></li>
-    <li>Weapons: <%=history.numberOfLoss%></li>
+    <li class = "show-li">Name: <%=history.name%></li>
+    <li class = "show-li">Region: <%=history.region%></li>
+    <li class = "show-li">Who: <%=history.involvedStates1%></li>
+    <li class = "show-li">against: <%=history.involvedStates2%></li>
+    <li class = "show-li">From: <%=history.dateFrom%></li>
+    <li class = "show-li">To: <%=history.dateTo%></li>
+    <li class = "show-li">Casualties: <%=history.casualties%></li>
+    <li class = "show-li">Facts:</li> 
+    <li class = "show-li"><%=history.facts%></li>
   </ul>
 </div>
 <%if(user) {%>
-<div class="facts-div">
-  <ul class="facts-ul">
-    <%history.comments.forEach((h, idx) => { %>
-    <%if(user.comments.includes(h._id)) {%>
-    <li class="facts-li">
-      <%= user.name %>: 
-      <%= comments[idx].comments%>
-      <%if(user.comments.includes(h._id)) {%>
-     
-      <div class="update">
-        <form action="/ancients/delete/<%=h._id%>?_method=DELETE" method="POST">
-          <button type="submit" class="histories-button">X</button>
-        </form>
-      </div>
-      <%}%>
-    </li>
-    <%}});%>
-    <br />
-    <br />
-  </ul>
-</div>
-
+  <div class="facts-div">
+    <ul class="facts-ul">
+      <%comments.forEach((c, idx) => { %>
+      <%history.comments.forEach((h, idx) => { %>
+        <%if(c._id.toString() == h.toString()) {%>
+      <li class="facts-li">
+        <%= user.name %>: 
+        <%= c.comments%>
+        <%if(user.comments.includes(h._id)) {%>
+        <div class="update">
+          <form action="/medivals/delete/<%=h._id%>?_method=DELETE" method="POST">
+            <button type="submit" class="histories-button">X</button>
+          </form>
+        </div>
+        <%}%>
+      </li>
+      <%}});%>
+      <%})%>
+      <br />
+      <br />
+    </ul>
+  </div>
+  
 <div class="facts-text">
   <form action="<%=`/ancients/comments/${id}`%>" method="POST">
     facts:<br />
@@ -52,13 +54,15 @@
   </form>
 </div>
 <% } else { %>
-<div class="facts-div">
-  <ul class="facts-ul">
-    <%history.comments.forEach((h, idx) => { %>
-    <li class="facts-li">
-      <%= comments[idx].comments%>
+  <div class="facts-div">
+    <ul class="facts-ul">
+      <%comments.forEach((c, idx) => { %>
+      <%history.comments.forEach((h, idx) => { %>
+        <%if(c._id.toString() == h.toString()) {%>
+      <li class="facts-li"> 
+        <%= c.comments%>
     </li>
-    <%});%>
+    <%}})});%>
     <br />
     <br />
   </ul>

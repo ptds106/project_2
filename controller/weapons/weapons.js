@@ -1,10 +1,8 @@
-const Weapon = require("../../models/weapon");
-const History = require("../../models/history");
 var User = require("../../models/user");
+const Weapon = require("../../models/weapon");
 var Comment = require("../../models/comment");
 
-const newWeapon = (req, res) => {
-  console.log('you are in weapon')
+const newWeapons = (req, res) => {
   Weapon.find({}, (err, weapon) => {
     if (err) {
       res.render("error");
@@ -13,71 +11,86 @@ const newWeapon = (req, res) => {
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: weapon
+      histories: weapon,
     });
   });
 };
-
-function index(req, res, next) {
-  let modelQuery = req.query.name
-    ? { name: new RegExp(req.query.name, "i") }
-    : {};
-  let sortKey = req.query.sort || "name";
-  Weapon.find(modelQuery)
-    .sort(sortKey)
-    .exec(function(err, weapons) {
-      if (err) return next(err);
-      res.render("/weapons", {
-        weapons,
-        user: req.user,
-        name: req.query.name,
-        sortKey
-      });
-    });
-}
-
-const create = (req, res) => {
-  console.log("this is create weapons");
-  const createWeapons = new Weapon(req.body);
-  createWeapons.save(err => {
-    if (err) return res.redirect("/weapons/add-weapons");
-    res.redirect("/weapons/views");
-  });
-};
-const indexView = (req, res) => {
-  Weapon.find({}, (err, weapon) => {
+const index = (req, res) => {
+  Weapon.find({}, (err, weapons) => {
     if (err) {
       res.render("error");
     }
-    const sortedWeapons = weapon.sort((a, b) => (a.weaponYear > b.weaponYear) ? 1 : -1)
+    const sortedWeapons = weapon.sort((a, b) => (a.weaponOriginRegion > b.weaponOriginRegion ? 1 : -1));
+    res.render("index", {
+      weaponsSorted: sortedWeapons,
+      id: req.params.id,
+      user: req.user,
+      name: req.query.name,
+      histories: weapons
+    });
+  });
+};
+const indexView = (req, res) => {
+  Weapon.find({}, (err, weapons) => {
+    if (err) {
+      res.render("error");
+    }
+    const sortedWeapons = weapons.sort((a, b) => (a.weaponOriginRegion > b.weaponOriginRegion ? 1 : -1));
     res.render("histories/weapons/histories", {
       weaponSorted: sortedWeapons,
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: weapon,
+      histories: weapons,
     });
-  }); 
-}
+  });
+};
 const show = (req, res) => {
-  Weapon.findById(req.params.id, (err, weapon) => {
-        res.render('histories/weapons/histories-show', { 
-          weapon,
-          user: req.user,
-          name: req.query.name
-        });
+  Weapon.findById(req.params.id, (err, weapons) => {
+    Comment.find({}, (err, comments) => {
+      res.render("histories/weapons/histories-show", {
+        weapons,
+        id: req.params.id,
+        user: req.user,
+        name: req.query.name,
+        comments
       });
+    });
+  });
+};
+const create = (req, res) => {
+  const createWeapon = new Weapon(req.body);
+  createWeapon.save(err => {
+    req.user.weapons.push(createWeapon);
+    req.user.save();
+    if (err) return res.redirect("error");
+    res.redirect("/weapons/views");
+  });
 };
 
 const deleteWeapons = (req, res) => {
-  console.log('deleting contemporary ID')
-  Weapon.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-  res.redirect("/views");
+  Weapon.find({}, (err, weapons) => {
+    User.findById(req.user).exec((err, user) => {
+      weapons.forEach((h, idx) => {
+        if (h._id == req.params.id) {
+          h.comments.forEach((c, idx) => {
+            Comment.findOneAndDelete({ _id: c }, (err, deletedItem) => {});
+            user.comments.splice(user.comments.indexOf(c), 1);
+            user.weapons.splice(user.weapons.indexOf(req.params.id), 1);
+            user.save();
+          });
+        }
+      });
+    });
+    Weapon.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
+  });
+  res.redirect("/weapons/views");
 };
+
 const edit = (req, res) => {
-  Weapon.findById(req.params.id, (err, weapon) => {
+  Weapon.findById(req.params.id, (err, weapons) => {
     res.render("histories/crud/edit-weapons", {
-      histories: weapon,
+      histories: weapons,
       id: req.params.id,
       user: req.user,
       name: req.query.name
@@ -88,7 +101,7 @@ const edit = (req, res) => {
 const update = (req, res) => {
   Weapon.findByIdAndUpdate(req.params.id, req.body, (err, weapon) => {
     if (err) return res.status(500).send(err);
-    res.redirect("/views");
+    res.redirect("/weapons/views");
   });
 };
 
@@ -97,7 +110,7 @@ module.exports = {
   indexView,
   create,
   show,
-  new: newWeapon,
+  new: newWeapons,
   delete: deleteWeapons,
   edit,
   update

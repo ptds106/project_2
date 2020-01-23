@@ -10,33 +10,30 @@
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
-    <li>Name: <%=history.name%></li>
-    <li>Region: <%=history.region%></li>
-    <li>Who: <%=history.involvedStates1%></li>
-    <li>against: <%=history.involvedStates2%></li>
-    <li>From: <%=history.dateFrom%></li>
-    <li>To: <%=history.dateTo%></li>
-    <li>Casualties: <%=history.casualties%></li>
+    <li class = "show-li">Name: <%=history.name%></li>
+    <li class = "show-li">Region: <%=history.region%></li>
+    <li class = "show-li">Who: <%=history.involvedStates1%></li>
+    <li class = "show-li">against: <%=history.involvedStates2%></li>
+    <li class = "show-li">From: <%=history.dateFrom%></li>
+    <li class = "show-li">To: <%=history.dateTo%></li>
+    <li class = "show-li">Casualties: <%=history.casualties%></li>
+    <li class = "show-li">Facts:</li> 
+    <li class = "show-li"><%=history.facts%></li>
   </ul>
 </div>
-<div class= "facts-div">
-    <ul class= "facts-ul">
-      <li class= "facts-li">
-        <%for(let i = 0; i < history.comments.length; i++) {%>
-          <%= history.comments[i]%>
-          <%};%>
-    </li>
-  </ul>
+  <div class="facts-div">
+    <ul class="facts-ul">
+      <%comments.forEach((c, idx) => { %>
+      <%history.comments.forEach((h, idx) => { %>
+        <%if(c._id.toString() == h.toString()) {%>
+      <li class="facts-li">
+        <%= user.name %>: 
+        <%= c.comments%>
+      </li>
+      <%}});%>
+      <%})%>
+      <br />
+      <br />
+    </ul>
   </div>
-  
-  <div class= facts-text>
-    <form action="/histories" method="POST">
-  facts:<br>
-  <textarea class="textarea" name="facts" rows="4" cols="40">
-  </textarea>
-  <br/>
-  <input type="submit">
-  </form>
-  </div>
-  
 <%- include('../partials/footer') %>

@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+<style class = "index_img">
+body {
+    background-image: url("https://www.myjewishlearning.com/wp-content/uploads/2003/02/torah-scroll.jpg");
+    background-size: 100%;
+  }
+  </style>
+
+<div class="create-War">
+    <form action="/weapons" method="POST">
+      <h2>World Weapons</h2>
+    <br/>
+    <label>Name of Weapon: <input type="text" name="weaponName" class = 'name'/> </label>
+    <br/>
+    <br/>
+    <label>Weapon Type: <select name="weaponType">
+      <option value="melee">melee</option>
+      <option value="range">range</option>
+    </select></label><br/>
+    <br/>
+    <br/>
+    <label>Type: <input type= "text" name="weaponTypeName"></label>
+    <br/>
+    <br/>
+    <label>Origin: <select name="weaponOriginRegion">
+      <option value="North America">North America</option>
+      <option value="South America">South America</option>
+      <option value="Europe">Europe</option>
+      <option value="Asia">Asia</option>
+      <option value="Africa">Africa</option>
+    </select></label><br/>
+    <br/>
+    <br/>
+    <label>First Used Year: <input type= "text" name="weaponYear"></label>
+    <br/>
+    <br/>
+    <input type="submit" value="update wars" />
+  </form>
+  </div>
+  
+<%- include('../partials/footer') %>

@@ -3,11 +3,11 @@ var User = require("../../models/user");
 var Comment = require("../../models/comment");
 
 const index = (req, res) => {
-  Weapon.find({}, (err, weapon) => {
+  Weapon.find({}, (err, weapons) => {
     if (err) {
       res.render("error");
     }
-    const sortedWeapons = weapon.sort((a, b) =>
+    const sortedWeapons = weapons.sort((a, b) =>
       a.weaponYear > b.weaponYear ? 1 : -1
     );
     res.render("histories/weapons/contemporaries", {
@@ -15,15 +15,15 @@ const index = (req, res) => {
       id: req.params.id,
       user: req.user,
       name: req.query.name,
-      histories: weapon
+      histories: weapons
     });
   });
 };
 const show = (req, res) => {
-  Weapon.findById(req.params.id, (err, weapon) => {
+  Weapon.findById(req.params.id, (err, weapons) => {
     Comment.find({}, (err, comments) => {
       res.render("histories/weapons/contemporaries-show", {
-        weapon,
+        weapons,
         id: req.params.id,
         user: req.user,
         name: req.query.name,
@@ -38,27 +38,27 @@ function addComments(req, res, next) {
   comment.save(err => {
     if (err) res.redirect("error");
     req.user.comments.push(comment);
-    Weapon.findById(req.params.id, (err, weapon) => {
+    Weapon.findById(req.params.id, (err, weapons) => {
       req.user.save(function(err) {
-        weapon.comments.push(comment);
-        weapon.save();
-        res.redirect(`/weapon/contemporaries/${req.params.id}`);
+        weapons.comments.push(comment);
+        weapons.save();
+        res.redirect(`/weapons/contemporaries/${req.params.id}`);
       });
     });
   });
 }
 const deleteWars = (req, res) => {
-  Weapon.find({ comments: req.params.id }, (err, weapon) => {
-    let array = weapon[0].comments;
+  Weapon.find({ comments: req.params.id }, (err, weapons) => {
+    let array = weapons[0].comments;
     array.splice(array.indexOf(req.params.id), 1);
-    weapon[0].save();
+    weapons[0].save();
 
     User.findById(req.user).exec((err, user) => {
       user.comments.splice(user.comments.indexOf(req.params.id), 1);
       user.save();
     });
     Comment.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-    res.redirect(`/weapon/contemporaries/${weapon[0].id}`);
+    res.redirect(`/weapons/contemporaries/${weapons[0].id}`);
   });
 };
 module.exports = {
