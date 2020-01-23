@@ -105,14 +105,15 @@ const update = (req, res) => {
     res.redirect("/weapons/views");
   });
 };
-const addToHistory = (req, res) => {
-  History.findById(req.params.id, (err, history) => {
-     history.weapons.push(req.body.seats);
-    history.save(err => {
-      res.redirect(`/histories/${history._id}`)
+const addToWar = (req, res) => {
+  History.findById(req.params.id, (err, histories) => {
+     histories.weapon.push(req.body.weapon);
+    histories.save(err => {
+      res.redirect(`/histories/${histories._id}`)
     })
   })
 }
+
 module.exports = {
   index,
   indexView,
@@ -122,5 +123,5 @@ module.exports = {
   delete: deleteWeapons,
   edit,
   update,
-  addToHistory,
+  addToWar,
 };

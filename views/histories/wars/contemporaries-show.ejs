@@ -10,15 +10,20 @@
 </div>
 <div class="medival-show">
   <ul class="medival-ul">
-    <li class = "show-li">Name: <%=history.name%></li>
-    <li class = "show-li">Region: <%=history.region%></li>
-    <li class = "show-li">Who: <%=history.involvedStates1%></li>
-    <li class = "show-li">against: <%=history.involvedStates2%></li>
-    <li class = "show-li">From: <%=history.dateFrom%></li>
-    <li class = "show-li">To: <%=history.dateTo%></li>
-    <li class = "show-li">Casualties: <%=history.casualties%></li>
+    <li class = "show-li">Name: <%=histories.name%></li>
+    <li class = "show-li">Region: <%=histories.region%></li>
+    <li class = "show-li">Who: <%=histories.involvedStates1%></li>
+    <li class = "show-li">against: <%=histories.involvedStates2%></li>
+    <li class = "show-li">From: <%=histories.dateFrom%></li>
+    <li class = "show-li">To: <%=histories.dateTo%></li>
+    <li class = "show-li">Casualties: <%=histories.casualties%></li>
     <li class = "show-li">Facts:</li> 
-    <li class = "show-li"><%=history.facts%></li>
+    <li class = "show-li"><%=histories.facts%></li>
+    <h2>WEAPONS USED</h2>
+    <%console.log(histories)%>
+    <%- histories.weapon.map(p => ` <li>${p.weaponName}</li>
+    ` ).join('')%>
+ 
   </ul>
 </div>
 <%if(user) {%>

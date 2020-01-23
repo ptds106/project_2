@@ -9,5 +9,5 @@ router.get('/:id', weaponsCtrl.show);
 router.delete('/delete/:id', weaponsCtrl.delete);
 router.get('/edit/:id', weaponsCtrl.edit)
 router.put('/update/:id', weaponsCtrl.update)
-router.post('/cross/:id', weaponsCtrl.addToHistory)
+router.post('/addToWar/:id', weaponsCtrl.addToWar)
 module.exports = router;

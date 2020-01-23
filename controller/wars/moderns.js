@@ -1,6 +1,8 @@
 const History = require("../../models/history");
 var User = require("../../models/user");
 var Comment = require("../../models/comment");
+var Weapon = require("../../models/weapon");
+
 const index = (req, res) => {
   History.find({}, (err, war) => {
     if (err) {
@@ -17,17 +19,22 @@ const index = (req, res) => {
   });
 };
 const show = (req, res) => {
-  History.findById(req.params.id, (err, history) => {
-    Comment.find({}, (err, comments) => {
-      res.render("histories/wars/moderns-show", {
-        history,
-        id: req.params.id,
-        user: req.user,
-        name: req.query.name,
-        comments
-      });
+  History.findById(req.params.id)
+    .populate("weapon")
+    .exec((err, histories) => {
+      Comment.find({}, (err, comments) => {
+        Weapon.find({ _id: { $nin: histories.weapon } }).exec((err, weapons) => {
+          res.render("histories/wars/moderns-show", {
+            histories,
+            id: req.params.id,
+            user: req.user,
+            name: req.query.name,
+            comments,
+            weapons
+          });
+        });
+      }); 
     });
-  });
 };
 
 function addComments(req, res, next) {

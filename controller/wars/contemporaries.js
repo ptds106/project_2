@@ -1,6 +1,8 @@
 const History = require("../../models/history");
 var User = require("../../models/user");
 var Comment = require("../../models/comment");
+var Weapon = require("../../models/weapon");
+
 const index = (req, res) => {
   History.find({}, (err, war) => {
     if (err) {
@@ -17,17 +19,22 @@ const index = (req, res) => {
   });
 }
 const show = (req, res) => {
-  History.findById(req.params.id, (err, history) => {
-    Comment.find({}, (err, comments) => {
-      res.render("histories/wars/contemporaries-show", {
-        history,
-        id: req.params.id,
-        user: req.user,
-        name: req.query.name,
-        comments
-      });
+  History.findById(req.params.id)
+    .populate("weapon")
+    .exec((err, histories) => {
+      Comment.find({}, (err, comments) => {
+        Weapon.find({ _id: { $nin: histories.weapon } }).exec((err, weapons) => {
+          res.render("histories/wars/contemporaries-show", {
+            histories,
+            id: req.params.id,
+            user: req.user,
+            name: req.query.name,
+            comments,
+            weapons
+          });
+        });
+      }); 
     });
-  });
 };
 
 function addComments(req, res, next) {
@@ -35,28 +42,28 @@ function addComments(req, res, next) {
   comment.save(err => {
     if (err) res.redirect("error");
     req.user.comments.push(comment);
-    History.findById(req.params.id, (err, history) => {
+    History.findById(req.params.id, (err, histories) => {
       req.user.save(function(err) {
-        history.comments.push(comment);
-        history.save();
+        histories.comments.push(comment);
+        histories.save();
         res.redirect(`/contemporaries/${req.params.id}`);
       });
     });
   });
 }
 const deleteWars = (req, res) => {
-  History.find({ comments: req.params.id }, (err, history) => {
+  History.find({ comments: req.params.id }, (err, histories) => {
   
-    let array = history[0].comments;
+    let array = histories[0].comments;
     array.splice(array.indexOf(req.params.id), 1);
-    history[0].save();
+    histories[0].save();
 
     User.findById(req.user).exec((err, user) => {
       user.comments.splice(user.comments.indexOf(req.params.id), 1);
       user.save();
     });
     Comment.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-    res.redirect(`/contemporaries/${history[0].id}`);
+    res.redirect(`/contemporaries/${histories[0].id}`);
   });
 };
 module.exports = {

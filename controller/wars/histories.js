@@ -1,5 +1,6 @@
 var User = require("../../models/user");
 const History = require("../../models/history");
+var Weapon = require("../../models/weapon");
 var Comment = require("../../models/comment");
 
 const newWar = (req, res) => {
@@ -47,18 +48,24 @@ const indexView = (req, res) => {
 };
 
 const show = (req, res) => {
-  History.findById(req.params.id, (err, history) => {
-    Comment.find({}, (err, comments) => {
-      res.render("histories/wars/histories-show", {
-        history,
-        id: req.params.id,
-        user: req.user,
-        name: req.query.name,
-        comments
-      });
+  History.findById(req.params.id)
+    .populate("weapon")
+    .exec((err, histories) => {
+      Comment.find({}, (err, comments) => {
+        Weapon.find({ _id: { $nin: histories.weapon } }).exec((err, weapons) => {
+          res.render("histories/wars/histories-show", {
+            histories,
+            id: req.params.id,
+            user: req.user,
+            name: req.query.name,
+            comments,
+            weapons
+          });
+        });
+      }); 
     });
-  });
 };
+
 const create = (req, res) => {
   const createWar = new History(req.body);
   createWar.save(err => {
@@ -89,9 +96,9 @@ const deleteWars = (req, res) => {
 };
 
 const edit = (req, res) => {
-  History.findById(req.params.id, (err, history) => {
+  History.findById(req.params.id, (err, histories) => {
     res.render("histories/crud/edit-wars", {
-      histories: history,
+      histories,
       id: req.params.id,
       user: req.user,
       name: req.query.name

@@ -1,6 +1,7 @@
 var Weapon = require("../../models/weapon");
 var User = require("../../models/user");
 var Comment = require("../../models/comment");
+var History = require("../../models/history");
 
 const index = (req, res) => {
   Weapon.find({}, (err, weapons) => {

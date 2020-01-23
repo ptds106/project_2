@@ -177,6 +177,10 @@ body {
   min-width: 600px;
 }
 
+.weapons{
+  margin: 0px 0px 0px 0px;
+  overflow: auto;
+}
 .update{
   float: right;
 }
