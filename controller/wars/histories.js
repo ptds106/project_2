@@ -31,7 +31,6 @@ const index = (req, res) => {
   });
 };
 const indexView = (req, res) => {
-  console.log(req.user.history);
   History.find({}, (err, war) => {
     if (err) {
       res.render("error");
@@ -66,19 +65,23 @@ const create = (req, res) => {
 };
 
 const deleteWars = (req, res) => {
-  History.find({ comments: req.params.id }, (err, history) => {
-    let array = history[0].comments;
-    array.splice(array.indexOf(req.params.id), 1);
-    history[0].save();
-
+  History.find({}, (err, history) => {
     User.findById(req.user).exec((err, user) => {
-      user.comments.splice(user.comments.indexOf(req.params.id), 1);
-      user.history.splice(user.history.indexOf(req.params.id), 1);
-      user.save();
+      history.forEach((h, idx) => {
+        if (h._id == req.params.id) {
+          h.comments.forEach((c, idx) => {
+            Comment.findOneAndDelete({ _id: c }, (err, deletedItem) => {});
+            user.comments.splice(user.comments.indexOf(c), 1);
+            user.history.splice(user.history.indexOf(req.params.id), 1)
+            user.save();
+          });
+        }
+      });
     });
-    Comment.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
-    res.redirect("/histories/views")
+    History.findOneAndDelete({ _id: req.params.id }, (err, deletedItem) => {});
   });
+
+  res.redirect("/histories/views");
 };
 
 const edit = (req, res) => {

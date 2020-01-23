@@ -29,6 +29,7 @@
       <%= user.name %>: 
       <%= comments[idx].comments%>
       <%if(user.comments.includes(h._id)) {%>
+     
       <div class="update">
         <form action="/ancients/delete/<%=h._id%>?_method=DELETE" method="POST">
           <button type="submit" class="histories-button">X</button>
