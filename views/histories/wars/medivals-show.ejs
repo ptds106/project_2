@@ -20,7 +20,6 @@
     <li class = "show-li">Facts:</li> 
     <li class = "show-li"><%=histories.facts%></li>
     <h2>WEAPONS USED</h2>
-    <%console.log(histories)%>
     <%- histories.weapon.map(p => ` <li>${p.weaponName}</li>
     ` ).join('')%>
   </ul>
