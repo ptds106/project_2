@@ -8,10 +8,14 @@ var passport = require("passport");
 var cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 var app = express();
-
+app.get('/', () => console.log('hi'))
 require("dotenv").config();
+console.log(process.env)
+
 require("./config/passport");
 require("./config/database");
+
+
 
 var indexRouter = require("./routes/index");
 
