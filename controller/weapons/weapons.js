@@ -47,17 +47,22 @@ const indexView = (req, res) => {
   });
 };
 const show = (req, res) => {
-  Weapon.findById(req.params.id, (err, weapons) => {
-    Comment.find({}, (err, comments) => {
-      res.render("histories/weapons/histories-show", {
-        weapons,
-        id: req.params.id,
-        user: req.user,
-        name: req.query.name,
-        comments
-      });
+  Weapon.findById(req.params.id)
+    .populate("history")
+    .exec((err, weapons) => {
+      Comment.find({}, (err, comments) => {
+        History.find({ _id: { $nin: weapons.history } }).exec((err, histories) => {
+          res.render("histories/weapons/histories-show", {
+            histories,
+            id: req.params.id,
+            user: req.user,
+            name: req.query.name,
+            comments,
+            weapons
+          });
+        });
+      }); 
     });
-  });
 };
 const create = (req, res) => {
   const createWeapon = new Weapon(req.body);

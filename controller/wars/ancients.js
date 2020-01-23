@@ -52,7 +52,7 @@ function addComments(req, res, next) {
     });
   });
 }
-const deleteWars = (req, res) => {
+const deleteComments = (req, res) => {
   History.find({ comments: req.params.id }, (err, histories) => {
     let array = histories[0].comments;
     array.splice(array.indexOf(req.params.id), 1);
@@ -70,5 +70,5 @@ module.exports = {
   index,
   show,
   addComments,
-  delete: deleteWars
+  delete: deleteComments
 };

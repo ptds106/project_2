@@ -37,8 +37,9 @@
       </form>
       <h2>WEAPONS ADDED</h2>
       <%console.log(histories)%>
-      <%- histories.weapon.map(p => ` <li>${p.weaponName}</li>
+      <%- histories.weapon.map(p => ` <li>${p.weaponName}
       ` ).join('')%>
+      </li>
     </ul>
   </div>
 <%- include('../partials/footer') %>

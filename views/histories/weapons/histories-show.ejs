@@ -17,17 +17,22 @@
     <li class = "show-li">From: <%=weapons.weaponYear%></li>
   </ul>
 </div>
-<div class= "facts-div">
-  <ul class= "facts-ul">
-    <li class= "facts-li">
-
-  </li>
-</ul>
-</div>
-
-<div class= facts-text>
-facts:<br>
-<textarea name="facts" rows="6" cols="40">
-</textarea>
+<div class="facts-div">
+  <ul class="facts-ul">
+    <h2 class= "weapon">Wars: </h2>
+    <form id="add-to-war" action="/histories/addToWeapon/<%= weapons._id%>" method="POST">
+      <select name="history" style="width:45%" >
+        <%- histories.map(w =>` <option value="${w._id}">${w.name}</option>
+        `).join('')%>
+      </select>
+      <button class= "war-button" type="submit" style="width:45%">Add to Weapon</button>
+      <br/>
+      <br/>
+      <br/>
+    </form>
+    <h2>WEAPONS ADDED</h2>
+    <%- weapons.history.map(p => ` <li>${p.name}</li>
+    ` ).join('')%>
+  </ul>
 </div>
 <%- include('../partials/footer') %>

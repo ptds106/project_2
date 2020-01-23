@@ -29,7 +29,7 @@
 <%if(user) {%>
   <div class="facts-div">
     <ul class="facts-ul">
-      <%comments.forEach((c, idx) => { %> <%history.comments.forEach((h, idx) => {
+      <%comments.forEach((c, idx) => { %> <%histories.comments.forEach((h, idx) => {
       %> <%if(c._id.toString() == h.toString()) {%>
       <li class="facts-li">
         <%= user.name %>: <%= c.comments%> <%if(user.comments.includes(h._id)) {%>
