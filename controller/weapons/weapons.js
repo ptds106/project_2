@@ -1,5 +1,6 @@
 var User = require("../../models/user");
 const Weapon = require("../../models/weapon");
+const History = require("../../models/history");
 var Comment = require("../../models/comment");
 
 const newWeapons = (req, res) => {
@@ -104,7 +105,14 @@ const update = (req, res) => {
     res.redirect("/weapons/views");
   });
 };
-
+const addToHistory = (req, res) => {
+  History.findById(req.params.id, (err, history) => {
+     history.weapons.push(req.body.seats);
+    history.save(err => {
+      res.redirect(`/histories/${history._id}`)
+    })
+  })
+}
 module.exports = {
   index,
   indexView,
@@ -113,5 +121,6 @@ module.exports = {
   new: newWeapons,
   delete: deleteWeapons,
   edit,
-  update
+  update,
+  addToHistory,
 };

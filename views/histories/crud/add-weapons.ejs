@@ -1,41 +1,54 @@
 <%- include('../partials/header') %>
-<style class = "index_img">
-body {
+<style class="index_img">
+  body {
     background-image: url("https://c.wallhere.com/photos/a4/8b/tools_work_blacksmith_Mallet_embers-32156.jpg!d");
     background-size: 100%;
   }
-  </style>
+</style>
 
-  <div class="create-War">
+<div class="create-War">
   <form action="/weapons" method="POST">
     <h2>World Weapons</h2>
-  <br/>
-  <label>Name of Weapon: <input type="text" name="weaponName" class = 'name'/> </label>
-  <br/>
-  <br/>
-  <label>Weapon Type: <select name="weaponType">
-    <option value="melee">melee</option>
-    <option value="range">range</option>
-  </select></label><br/>
-  <br/>
-  <br/>
-  <label>Type: <input type= "text" name="weaponTypeName"></label>
-  <br/>
-  <br/>
-  <label>Origin: <select name="weaponOriginRegion">
-    <option value="North America">North America</option>
-    <option value="South America">South America</option>
-    <option value="Europe">Europe</option>
-    <option value="Asia">Asia</option>
-    <option value="Africa">Africa</option>
-  </select></label><br/>
-  <br/>
-  <br/>
-  <label>First Used Year: <input type= "text" name="weaponYear"></label>
-  <br/>
-  <br/>
-  <input type="submit" value="update wars" />
-</form>
+    <br />
+    <label
+      >Name of Weapon: <input type="text" name="weaponName" class="name" />
+    </label>
+    <br />
+    <br />
+    <label
+      >Weapon Type:
+      <select name="weaponType">
+        <option value="melee">melee</option>
+        <option value="range">range</option>
+      </select></label
+    ><br />
+    <br />
+    <br />
+    <label>Type: <input type="text" name="weaponTypeName"/></label>
+    <br />
+    <br />
+    <label
+      >Origin:
+      <select name="weaponOriginRegion">
+        <option value="North America">North America</option>
+        <option value="South America">South America</option>
+        <option value="Europe">Europe</option>
+        <option value="Asia">Asia</option>
+        <option value="Africa">Africa</option>
+      </select></label
+    ><br />
+    <br />
+    <br />
+    <label>First Used Year: <input type="text" name="weaponYear"/></label>
+    <br />
+    <br />
+    Facts:
+
+    <textarea name="facts" rows="6" cols="40"></textarea>
+    <br />
+    <br />
+    <input type="submit" value="ADD WEAPON" />
+  </form>
 </div>
 
 <%- include('../partials/footer') %>

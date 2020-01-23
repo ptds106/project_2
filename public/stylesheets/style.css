@@ -154,6 +154,7 @@ body {
   overflow: auto;
 }
 .history-a {
+  padding: 5px 10px 5px 10px;
   font-size: 20px;
   color: #999;
   font-weight: bold;
@@ -162,14 +163,26 @@ body {
   text-decoration: none;
   display: block;
   border: 2px solid #999;
-}
-.history-a {
   min-height: 50px;
+  min-width: 600px;
 }
+.history-a:hover span{
+  display: none;
+}
+ .history-a:hover:before{
+  content: "ADD WEAPON";
+  background-color: black;
+  color: red;
+  min-height: 50px;
+  min-width: 600px;
+}
+
 .update{
   float: right;
 }
-
+.update-button{
+  display:block;
+}
 
 .facts-div {  
   overflow: auto;

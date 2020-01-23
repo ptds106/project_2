@@ -45,6 +45,7 @@ const indexView = (req, res) => {
     });
   });
 };
+
 const show = (req, res) => {
   History.findById(req.params.id, (err, history) => {
     Comment.find({}, (err, comments) => {
