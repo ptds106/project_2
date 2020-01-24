@@ -2,7 +2,7 @@
 ☐ Your project's title: Histories of wars and weapons
 
 ☐ Screenshot(s): img <br/>
-![screenshot] (https://github.com/ptds106/project_2/blob/master/image/medieval.png?raw=true "screenshot")
+![screenshot](https://github.com/ptds106/project_2/blob/master/image/medieval.png?raw=true "screenshot")
 
 ☐ Technologies Used:JavaScript, HTML, CSS, MOngoose, Heroku, Express, Node.jS, Trello
 
