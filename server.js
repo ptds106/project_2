@@ -22,10 +22,10 @@ const modernsRouter = require("./routes/wars/moderns");
 const contemporariesRouter = require("./routes/wars/contemporaries");
 
 var weaponsRouter = require("./routes/weapons/histories");
-const ancientsWeaponsRouter = require("./routes/Weapons/ancients");
-const medivalsWeaponsRouter = require("./routes/Weapons/medivals");
-const modernsWeaponsRouter = require("./routes/Weapons/moderns");
-const contemporariesWeaponsRouter = require("./routes/Weapons/contemporaries");
+const ancientsWeaponsRouter = require("./routes/weapons/ancients");
+const medivalsWeaponsRouter = require("./routes/weapons/medivals");
+const modernsWeaponsRouter = require("./routes/weapons/moderns");
+const contemporariesWeaponsRouter = require("./routes/weapons/contemporaries");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
