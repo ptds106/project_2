@@ -8,7 +8,7 @@
 <ul class="medieval">
   <li>
     <%weaponsSorted.forEach((t, idx) => {if(Number(t.weaponYear) > 499 && Number(t.weaponYear) < 1500){ %>
-    <a class="medieval-a" href="/weapons/contemporaries/<%= t._id %>">
+    <a class="medieval-a" href="/weapons/medivals/<%= t._id %>">
       Name: <%= t.weaponName%> 
       Type: <%= t.weaponTypeName%>  
       <%= t.weaponYear%>

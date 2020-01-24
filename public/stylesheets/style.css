@@ -3,6 +3,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   overflow: auto;
   height: 100%;
+  margin: 0px 0px 0px 0px;
 }
 .ancient_history {
   width: 90%;
@@ -103,6 +104,8 @@ body {
   display: block;
   border: 2px solid black;
   padding: 5px 5px 5px 5px;
+  min-width: 750px;
+  opacity: 0.74;
 }
 .medieval-a a:hover {
   color: white;
@@ -153,7 +156,7 @@ body {
   list-style-type: none;
   overflow: auto;
 }
-.history-a {
+.history-a, .history-a2 {
   padding: 5px 10px 5px 10px;
   font-size: 20px;
   color: #999;
@@ -164,9 +167,9 @@ body {
   display: block;
   border: 2px solid #999;
   min-height: 50px;
-  min-width: 600px;
+  min-width: 800px;
 }
-.history-a:hover span{
+.history-a:hover span, .history-a2:hover span{
   display: none;
 }
  .history-a:hover:before{
@@ -174,7 +177,14 @@ body {
   background-color: black;
   color: red;
   min-height: 50px;
-  min-width: 600px;
+  min-width: 800px;
+}
+.history-a2:hover:before{
+  content: "ADD WAR";
+  background-color: black;
+  color: red;
+  min-height: 50px;
+  min-width: 800px;
 }
 
 .weapons{

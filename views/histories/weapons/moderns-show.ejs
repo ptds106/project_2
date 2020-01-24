@@ -15,6 +15,7 @@
     <li class = "show-li">Who: <%=weapons.weaponTypeName%></li>
     <li class = "show-li">against: <%=weapons.weaponOriginRegion%></li>
     <li class = "show-li">From: <%=weapons.weaponYear%></li>
+    <li class = "show-li">Facts: <%=weapons.facts%></li>
   </ul>
 </div>
 <%if(user) {%>
@@ -43,7 +44,7 @@
   
 <div class="facts-text">
   <form action="<%=`/weapons/moderns/comments/${id}`%>" method="POST">
-    facts:<br />
+    Comments:<br />
     <textarea class="textarea" name="comments" rows="4" cols="45"></textarea>
     <br />
     <input type="submit" />

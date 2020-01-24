@@ -9,9 +9,10 @@ body {
 <ul class="history-view">
   <li>
     <%warsSorted.forEach((w, idx) => {if(Number(w.dateFrom.substring(0,4)) > -9999) { %>
+      <%if(user.history.includes(w._id)) {%>
     <a class="history-a" href="/histories/<%= w._id %>">
       <span><%= w.name%> in <%= w.region%> from: <%= w.dateFrom.substring(0,4)%> ~ <%= w.dateTo.substring(0,4)%></span>
-      <%if(user.history.includes(w._id)) {%>
+
       <div class="update">
       <form action="/histories/delete/<%=w._id%>?_method=DELETE" 
         method="POST">

@@ -8,11 +8,14 @@ body {
 
 <ul class="history-view">
   <li>
+    
     <%weaponSorted.forEach((t, idx) => {if(Number(t.weaponYear > -9999)) { %>
-    <a class="history-a" href="/weapons/<%= t._id %>">
-      Name: <%= t.weaponName%> 
+      <%if(user.weapons.includes(t._id)) {%>
+      <a class="history-a2" href="/weapons/<%= t._id %>">
+        <span>Name: <%= t.weaponName%> 
       Type: <%= t.weaponTypeName%>
-      First Used: <%= t.weaponYear%>
+      First Used: <%= t.weaponYear%></span>
+  
       <div class="update">
       <form action="/weapons/delete/<%=t._id%>?_method=DELETE" 
         method="POST">
@@ -22,6 +25,7 @@ body {
         <button type="Edit"class="histories-button">Update weapon </button>
         </form>
       </div>
+      <%}%>
     </a>
     <%}});%>
   </li>

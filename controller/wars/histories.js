@@ -107,11 +107,12 @@ const edit = (req, res) => {
 };
 
 const update = (req, res) => {
-  History.findByIdAndUpdate(req.params.id, req.body, (err, flight) => {
+  History.findByIdAndUpdate(req.params.id, req.body, (err) => {
     if (err) return res.status(500).send(err);
     res.redirect("/histories/views");
   });
 };
+
 const addToWeapon = (req, res) => {
   Weapon.findById(req.params.id, (err, weapons) => {
      weapons.history.push(req.body.history);

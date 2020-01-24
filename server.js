@@ -10,11 +10,8 @@ const methodOverride = require("method-override");
 var app = express();
 
 require("dotenv").config();
-
 require("./config/passport");
 require("./config/database");
-
-
 
 var indexRouter = require("./routes/index");
 
